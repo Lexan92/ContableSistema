@@ -7,3 +7,7 @@ int dos;
 public void Uno(void){
     int dos;
 }
+
+public void lineaPruebados(void){
+    
+}
