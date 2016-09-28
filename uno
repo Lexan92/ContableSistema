@@ -1,0 +1,3 @@
+String texto;
+int dos;
+
