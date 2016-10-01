@@ -12,3 +12,9 @@ class Opcion(models.Model):
 	pregunta = models.ForeignKey(Pregunta)
 	texto_opcion = models.CharField(max_length=200)
 	votos = models.IntegerField(default=0)
+
+class Opcion1(models.Model):
+	pregunta = models.ForeignKey(Pregunta)
+	texto_opcion = models.CharField(max_length=200)
+	votos = models.IntegerField(default=0)
+	votos = models.IntegerField(default=0)
