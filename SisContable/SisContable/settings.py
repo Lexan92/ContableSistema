@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'Planilla',
+    'ContaGeneral'
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -80,7 +82,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2', 
        'NAME': 'SIC', 
        'USER': 'postgres', 
-        'PASSWORD': 'admin', 
+        'PASSWORD': 'ynnaf6', 
         'HOST': 'localhost', 
         'PORT': '5432', 
     }
