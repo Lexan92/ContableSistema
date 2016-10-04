@@ -16,14 +16,14 @@
 	</head>
 	<body>
 
-		<!-- Header -->
+				<!-- Header -->
 			<header id="header">
 			
 				<nav>
 					<ul>
-						<li><a href="index.html">Home</a></li>
-						<li><a href="generic.html" class="active">Generic</a></li>
-						<li><a href="elements.html">Ingresar</a></li>
+						<li><a href="index.html">Opcion 1</a></li>
+						<li><a href="generic.html" class="active">Opcion 2</a></li>
+						<li><a href="elements.html">Salir</a></li>
 					</ul>
 				</nav>
 			</header>
@@ -33,10 +33,17 @@
 				<div class="inner">
 					<nav>
 						<ul>
-							<li><a href="#intro">Inicio</a></li>
+
+							{%block sidebar %} {% endblock %}					
+
+
+
+							<!--
+							<li><a href="#header">Inicio</a></li>
 							<li><a href="#intro">Edicion</a></li>
 							<li><a href="#intro">Sobre nosotros</a></li>
-							<li><a href="#intro">Aun mas</a></li>
+							<li><a href="#footer">Aun mas</a></li>
+							-->
 						</ul>
 					</nav>
 				</div>
@@ -44,6 +51,7 @@
 
 		<!-- Wrapper -->
 			<div id="wrapper">
+		
 
 				<!-- Intro -->
 					<section id="intro" class="wrapper style1 fullscreen fade-up">
