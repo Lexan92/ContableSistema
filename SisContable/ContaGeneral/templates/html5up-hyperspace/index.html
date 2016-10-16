@@ -7,7 +7,7 @@
 <html>
 
 <head>
-	<title>Sistema Contable</title>
+	<title>{% block title %}{% endblock %}</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
@@ -23,7 +23,7 @@
 
 		<nav>
 			<ul>
-				{%block header %} {%endblock %}
+				{%block header %}{%endblock %}
 				<li><a href="index.html">Salir</a></li>
 			</ul>
 		</nav>
@@ -35,55 +35,53 @@
 			<nav>
 				<ul>
 
-					{%block sidebar %} {% endblock %}
+					{%block sidebar %} 
+					
+					<li><a href>
+					
+					{% endblock %}
 
 
 
 					<!--
-							<li><a href="#header">Inicio</a></li>
-							<li><a href="#intro">Edicion</a></li>
-							<li><a href="#intro">Sobre nosotros</a></li>
-							<li><a href="#footer">Aun mas</a></li>
-							-->
+							<li><a href="#header">Inicio</a></li>-->
 				</ul>
 			</nav>
 		</div>
 	</section>
 
 	<!-- Wrapper -->
-	<div id="wrapper">
+					<div id="wrapper">
 
-        
-		<!-- Intro -->
-		<section id="intro" class="wrapper style1 fullscreen fade-up">
-			<div class="inner">
 
-				{{% block wrapper %}
-				
-				{% endblock wrapper %}}			
+						<!-- Intro -->
+						<section id="intro" class="wrapper style1 fullscreen fade-up">
+							<div class="inner">
 
-				<h1>Espacio de trabajo </h1>
-				<p>este espacio sera el base para todas las operaciones</p>
-				<ul class="actions">
-					<li><a href="#one" class="button scrolly">Learn more</a></li>
-				</ul>
-			</div>
-		</section>
-      </div>
+								{% block wrapper %} {% endblock wrapper %}
+
+								<h1>Espacio de trabajo </h1>
+								<p>este espacio sera el base para todas las operaciones</p>
+								<ul class="actions">
+									<li><a href="#one" class="button scrolly">Learn more</a></li>
+								</ul>
+							</div>
+						</section>
+					</div>
 
 
 
 
 
 
-		<!-- Scripts -->
-		<script src="assets/js/jquery.min.js"></script>
-		<script src="assets/js/jquery.scrollex.min.js"></script>
-		<script src="assets/js/jquery.scrolly.min.js"></script>
-		<script src="assets/js/skel.min.js"></script>
-		<script src="assets/js/util.js"></script>
-		<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-		<script src="assets/js/main.js"></script>
+					<!-- Scripts -->
+					<script src="assets/js/jquery.min.js"></script>
+					<script src="assets/js/jquery.scrollex.min.js"></script>
+					<script src="assets/js/jquery.scrolly.min.js"></script>
+					<script src="assets/js/skel.min.js"></script>
+					<script src="assets/js/util.js"></script>
+					<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+					<script src="assets/js/main.js"></script>
 
 </body>
 
