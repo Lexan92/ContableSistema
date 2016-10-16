@@ -1,0 +1,28 @@
+{% extends "index.html" %}
+
+{% block header %}
+
+{% endblock header %}
+
+{%block sidebar %}
+<li><a href="#intro">Nuevo</a></li>
+<li><a href="#intro">Editar</a></li>
+<li><a href="#intro">Eliminar</a></li>
+      
+{% endblock sidebar %}
+
+{%block wrapper%}
+  <ul class="actions">  
+					<li><a href="#one" class="button scrolly">A&ntildeo fiscal</a></li>
+				</ul>
+
+                <p>
+                    <datalist id="anio">
+                        <option value="2016">
+                        <option value="2015">
+                        <option value="2014">        
+                    </datalist>
+
+                </p>
+
+{%endblock wrapper%}
