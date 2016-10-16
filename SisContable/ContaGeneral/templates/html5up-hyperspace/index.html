@@ -34,54 +34,48 @@
 		<div class="inner">
 			<nav>
 				<ul>
-
-					{%block sidebar %} 
-					
-					<li><a href>
-					
-					{% endblock %}
-
-
-
-					<!--
-							<li><a href="#header">Inicio</a></li>-->
+					<li>
+						{%block sidebar %} {% endblock %}
+					</li>
+					<!--<a href="#header">Inicio</li>-->
 				</ul>
 			</nav>
 		</div>
 	</section>
 
 	<!-- Wrapper -->
-					<div id="wrapper">
+	<div id="wrapper">
 
 
-						<!-- Intro -->
-						<section id="intro" class="wrapper style1 fullscreen fade-up">
-							<div class="inner">
+		<!-- Intro -->
+		<section id="intro" class="wrapper style1 fullscreen fade-up">
+			<div class="inner">
 
-								{% block wrapper %} {% endblock wrapper %}
+				{% block wrapper %} 
 
-								<h1>Espacio de trabajo </h1>
-								<p>este espacio sera el base para todas las operaciones</p>
-								<ul class="actions">
-									<li><a href="#one" class="button scrolly">Learn more</a></li>
-								</ul>
-							</div>
-						</section>
-					</div>
-
-
-
+				<h1>Espacio de trabajo </h1>
+				<p>este espacio sera el base para todas las operaciones</p>
+				<ul class="actions">
+					<li><a href="#one" class="button scrolly">Learn more</a></li>
+				</ul>
+				{% endblock wrapper %}
+			</div>
+		</section>
+	</div>
 
 
 
-					<!-- Scripts -->
-					<script src="assets/js/jquery.min.js"></script>
-					<script src="assets/js/jquery.scrollex.min.js"></script>
-					<script src="assets/js/jquery.scrolly.min.js"></script>
-					<script src="assets/js/skel.min.js"></script>
-					<script src="assets/js/util.js"></script>
-					<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-					<script src="assets/js/main.js"></script>
+
+
+
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/skel.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+	<script src="assets/js/main.js"></script>
 
 </body>
 
