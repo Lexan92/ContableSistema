@@ -1,8 +1,8 @@
-{% extends index.html}
+{% extends "html5up-hyperspace/index.html" %}
 
 {%block title %}Catalogo de Cuentas{% endblock %}
 
-<!-- JAVASCRIPT FALTA CAMBIARLE LOS VALORES REALES
+{%block wrapper%}
 <SCRIPT language="javascript">
 
           function addRow(tableID)
@@ -45,10 +45,12 @@
 
                }catch(e) {alert(e);}
       }
-     </SCRIPT>-->
+     </SCRIPT>
+
+{%endblock wrapper%}
 
 {%block sidebar %}
-<a href="diario.html">Buscar</a>
+<a href="../diario">Buscar</a>
 <a href="diario.html">Editar</a>
 <a>Eliminar</a>
 <a href="imprimir.html">Imprimir</a>

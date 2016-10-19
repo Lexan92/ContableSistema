@@ -6,5 +6,6 @@ from ContaGeneral import views
 
 urlpatterns= [
     url(r'^$', principal, name='main'),
-    url(r'^catalogo/',catalogo, name='catalogo'),
+    url(r'^catalogo/$',views.catalogo),
+    url(r'^diario/$',views.diario),
 ]

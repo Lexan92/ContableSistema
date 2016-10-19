@@ -1,5 +1,18 @@
- {% extends "index.html" %}
- <SCRIPT language="javascript">
+ {% extends "html5up-hyperspace/index.html" %}
+ 
+
+
+ {% block header %}
+ <li><a href="index.html">Planilla</a></li>
+  <li><a href="index.html">Consultar</a></li>
+ {% endblock header %}<li>
+
+{% block sidebar %}
+
+{%endblock sidebar%}
+
+{%block wrapper%}
+<SCRIPT language="javascript">
 
           function addRow(tableID)
       {
@@ -53,22 +66,10 @@
       }
      </SCRIPT>
 
-
- {% block header %}
- <li><a href="index.html">Planilla</a></li>
-  <li><a href="index.html">Consultar</a></li>
- {% endblock header %}<li>
-
-{% block sidebar %}
-
-{%enblock sidebar%}
-
-{%block wrapper%}
-
-<INPUT type="button" value="Add Row" onclick="addRow('dataTable');" />
-     <INPUT type="button" value="Delete Row" onclick="deleteRow('dataTable');" />
+<INPUT type="button" value="Agregar Fila" onclick="addRow('dataTable');" />
+     <INPUT type="button" value="Borrar Fila" onclick="deleteRow('dataTable');" />
      <TABLE id="dataTable" width="350px" border="1">
          
      </TABLE>
 
-{%enblock wrapper%}
+{%endblock wrapper%}
