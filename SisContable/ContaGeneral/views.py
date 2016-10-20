@@ -8,6 +8,6 @@ def catalogo(request):
    return render(request, 'html5up-hyperspace/catalogo.html')
 
 def diario(request):
-   return render(request, 'html5up-hyperspace/diario.html')
+   return render(request, "html5up-hyperspace/diario.html")
 
 # Create your views here.
