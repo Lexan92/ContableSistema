@@ -1,64 +1,48 @@
-{% extends "html5up-hyperspace/index.html" %}
+{% extends "html5up-hyperspace/index.html" %} {%block title %}Catalogo de Cuentas{% endblock %} {% block script %}
+<link rel="stylesheet" href="/static/css/tablaCatlogo.css" />
+<script type="text/javascript" src="/static/js/catalogo.js"></script> {% endblock %} {% block header %}
+<li><a href="diario">Planilla</a></li>
+<li><a href="index">Salir</a></li>
+{% endblock header %}
+<li>
 
-{%block title %}Catalogo de Cuentas{% endblock %}
+    {%block wrapper%}
+    
+    <table>
+        <caption>Catalogo de Cuentas</caption>
+        <tr>
+            <th>Codigo</th>
+            <th>Cuentas</th>
+            <th>Opciones</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>Activo</td>
 
- {% block header %}
- <li><a href="diario">Planilla</a></li>
-  <li><a href="index">Salir</a></li>
- {% endblock header %}<li>
+            <td><span class="editar" onclick="transformarEnEditable(this)">Editar</span></td>
+        </tr>
+        <tr>
+            <td>11</td>
+            <td>Activos Corrientes</td>
 
-{%block wrapper%}
-<SCRIPT language="javascript">
+            <td><span class="editar" onclick="transformarEnEditable(this)">Editar</span></td>
+        </tr>
+        <tr>
+            <td>1101</td>
+            <td>Caja General</td>
+            <td><span class="editar" onclick="transformarEnEditable(this)">Editar</span></td>
+        </tr>
+        <tr>
+            <td>1102</td>
+            <td>Caja Chica</td>
+            <td><span class="editar" onclick="transformarEnEditable(this)">Editar</span></td>
+        </tr>
+    </table>
+    <div id="contenedorForm">
+    </div>
 
-          function addRow(tableID)
-      {
-               var table = document.getElementById(tableID);
-               var rowCount = table.rows.length;
-               var row = table.insertRow(rowCount);
-               //se crea una varible celda y .type define q tipo sera
-               var cell1 = row.insertCell(0);
-               var element1 = document.createElement("input");
-               element1.type = "checkbox";
-               cell1.appendChild(element1);
-
-               var cell2 = row.insertCell(1);
-               var element2 = document.createElement("input");
-               element2.type = "text";
-               cell2.appendChild(element2);
-
-               var cell3 = row.insertCell(2);
-               var element3 = document.createElement("input");
-               element3.type = "text";
-               cell3.appendChild(element3);
-      }
-          function deleteRow(tableID)
-      {
-          try {
-               var table = document.getElementById(tableID);
-               var rowCount = table.rows.length;
-               for(var i=0; i<rowCount; i++)
-                  {
-                    var row = table.rows[i];
-                    var chkbox = row.cells[0].childNodes[0];
-                    if(null != chkbox && true == chkbox.checked) 
-                    {
-                         table.deleteRow(i);
-                         rowCount--;
-                         i--;
-                    }
-                  }
-
-               }catch(e) {alert(e);}
-      }
-     </SCRIPT>
-
-{%endblock wrapper%}
-
-{%block sidebar %}
-<a href="../diario">Buscar</a>
-<a href="diario.html">Editar</a>
-<a>Eliminar</a>
-<a href="imprimir.html">Imprimir</a>
-{% endblock %}
-
-
+    {%endblock wrapper%} {%block sidebar %}
+    <a href="../diario">Buscar</a>
+    <a href="diario.html">Editar</a>
+    <a>Eliminar</a>
+    <a href="imprimir.html">Imprimir</a> {% endblock %}
