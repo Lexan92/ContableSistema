@@ -1,12 +1,11 @@
-caption{ font-family:"Arial"; font-size: 27px;color:lightslategray;}
+caption{ font-family:"Lucida Sans Unicode", "Lucida Grande", Sans-Serif; font-size: 27px;color:black;font-weight: bold;}
  
-table { font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif; font-size: 12px; margin: 45px; width: 550px;
-    text-align: center; border-collapse: collapse; }
+table { font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif; font-size: 12px; margin: 15px; width: 750px; position: absolute; top:-275px; border-collapse: collapse; }
  
-th { font-size: 13px; font-weight: normal; padding: 8px; background: #b9c9fe; border-top: 4px solid #aabcfe;
+th { font-size: 13px; font-weight: normal; padding: 8px; background: steelblue; text-align: center;
     border-bottom: 1px solid #fff; color: #039; }
  
-td { padding: 8px; background: #e8edff; border-bottom: 1px solid #fff; color: #669; border-top: 1px solid transparent; }
+td { padding: 8px; background: #e8edff; border-bottom: 1px solid #fff; color: black; border-top: 1px solid transparent; }
  
 tr:hover td { background: #d0dafd; color: #339; }
  
