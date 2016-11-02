@@ -8,4 +8,5 @@ urlpatterns= [
     url(r'^$', principal, name='main'),
     url(r'^catalogo/$',views.catalogo),
     url(r'^diario/$',views.diario),
+    url(r'^empresa/$',views.empresa),
 ]
