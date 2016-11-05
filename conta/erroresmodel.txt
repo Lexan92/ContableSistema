@@ -1,0 +1,121 @@
+idCuenta=models.ForeignKey(cuenta,on_delete=models.CASCADE) sqlmigrate 0008
+idCuenta=models.ForeignKey(cuenta,default=1,on_delete=models.CASCADE)  0007
+idCuenta=models.ForeignKey(cuenta,on_delete=models.CASCADE,null=True)    0009 
+
+
+>>> frt="%d/%m/%Y"
+fecha="02/03/2015"
+>>> f=datetime_object = datetime.strptime(fecha,frt).date()
+>>> print(f)
+2015-03-02
+>>> f.strftime("%d/%m/%y")
+'02/03/15'
+>>> 
+
+==================================================================================
+si se pueden realizar operaciones de busqueda por dias o mes o anio o 
+por rangos de fecha por latanto es posible dejar como  atributo unico 
+en la clase del modelo de partida el atributo tipo datefield 
+====================================================================================
+
+
+Python 3.5.1 (v3.5.1:37a07cee5969, Dec  6 2015, 01:38:48) [MSC v.1900 32 bit (Intel)] on win32
+Type "copyright", "credits" or "license()" for more information.
+>>> frt="%d/%m/%Y"
+>>> 
+fecha1="02/03/2015"
+>>> 
+fecha2="04/03/2015"
+>>> 
+fecha3="06/03/2015"
+>>> 
+fecha4="02/04/2015"
+>>> 
+fecha5="15/03/2015"
+>>> 
+fecha6="09/06/2015"
+>>> 
+fecha7="22/03/2015"
+>>> 
+fecha8="05/07/2016"
+>>> 
+fecha="09/06/2016"
+>>> f1=datetime_object = datetime.strptime(fecha1,frt).date()
+Traceback (most recent call last):
+  File "<pyshell#10>", line 1, in <module>
+    f1=datetime_object = datetime.strptime(fecha1,frt).date()
+NameError: name 'datetime' is not defined
+>>> from datetime import datetime, date, time, timedelta
+>>> f1=datetime_object = datetime.strptime(fecha1,frt).date()
+>>> f2=datetime_object = datetime.strptime(fecha2,frt).date()
+>>> f3=datetime_object = datetime.strptime(fecha3,frt).date()
+>>> f4=datetime_object = datetime.strptime(fecha4,frt).date()
+>>> f5=datetime_object = datetime.strptime(fecha5,frt).date()
+>>> f6=datetime_object = datetime.strptime(fecha6,frt).date()
+>>> f7=datetime_object = datetime.strptime(fecha7,frt).date()
+>>> f8=datetime_object = datetime.strptime(fecha8,frt).date()
+>>> f9=datetime_object = datetime.strptime(fecha9,frt).date()
+Traceback (most recent call last):
+  File "<pyshell#20>", line 1, in <module>
+    f9=datetime_object = datetime.strptime(fecha9,frt).date()
+NameError: name 'fecha9' is not defined
+>>> f=datetime_object = datetime.strptime(fecha,frt).date()
+>>> listf=[]
+>>> listf.append(f1)
+>>> listf.append(f2)
+>>> listf.append(f3)
+>>> listf.append(f4)
+>>> listf.append(f5)
+>>> listf.append(f6)
+>>> listf.append(f7)
+>>> listf.append(f)8
+SyntaxError: invalid syntax
+>>> listf.append(f8)
+>>> listf.append(f)
+>>> for dt in listf: if dt>fecha4 and dt<fecha8: print("si asi es:"+dt)
+SyntaxError: invalid syntax
+>>> for dt in listf:
+	if dt>fecha4 and dt<fecha8:
+		print("si asi es:"+dt)
+
+		
+Traceback (most recent call last):
+  File "<pyshell#37>", line 2, in <module>
+    if dt>fecha4 and dt<fecha8:
+TypeError: unorderable types: datetime.date() > str()
+>>> for dt in listf:
+	if dt>f4 and dt<f8:
+		print("si asi es:"+dt)
+
+		
+Traceback (most recent call last):
+  File "<pyshell#41>", line 3, in <module>
+    print("si asi es:"+dt)
+TypeError: Can't convert 'datetime.date' object to str implicitly
+>>> for dt in listf:
+	if dt>f4 and dt<f8:
+		print("si asi es:"+str(dt))
+
+		
+si asi es:2015-06-09
+si asi es:2016-06-09
+>>> for dt in listf:
+	if dt.year==2016:
+		print("si asi es:"+str(dt))
+
+		
+si asi es:2016-07-05
+si asi es:2016-06-09
+>>> 
+777777777777777777777777777777777777777777777777777777777777777777
+validar error de codigo cuando se coloca un codigo con una longitud impar ejemplo
+"1,activo " esto generara error debido aque  se supone q la iportacion solo manejera rubros y cuentas no asi las "clases de cuentas"
+               def evaCodigo(self,objTupla)
+8888888888888888888 observacion : no resuelto  8888888888888888888888
+777777777777777777777777777777777777777777777777777777777777777777777
+
+==========================================================
+validar error cuando no existe el rubro en lA IMPORTACION  debido a un mal digitado
+        listC=rubro.getCuentas()#contiene todas las cuentas del rubro identificado 
+'''''''''''''''''''''''''''''''''no resuelto''''''''''''''''''''''''''''''''''''
+======================================================================

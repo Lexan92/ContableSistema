@@ -1,0 +1,17 @@
+<link rel="stylesheet" href="/static/css/style.css">
+<h1>Importar catalogo de cuentas</h1>
+    <label class="col-sm-3 control-label text-right">
+  Empresa:{{empresa}}
+      </label>
+    <form class="form-horizontal" action="{% url 'importar-nuevo' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+	<div class="hijo">
+        <table>
+        {{ form.as_table }}
+        </table>
+   
+    <input type="hidden" id="codEmpresa" name="codEmpresa" value="{{empresa.codEmpresa}}" />
+    <div class="form-group">
+    <div class="col-sm-12 text-center">
+    <input type="submit" class="btn btn-primary" value="ENVIAR ARCHIVO" />
+    </div></div></div>
+    </form>

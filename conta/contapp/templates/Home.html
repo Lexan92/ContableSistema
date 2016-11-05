@@ -1,0 +1,43 @@
+<link rel="stylesheet" href="/static/css/style.css">
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<h1>Iniciar sesión</h1>
+
+<H3>
+ <div class="menu">
+        <li class="menu-item current"><a href="/conta/GestionEmpresa/">NUEVA EMPRESA
+        </a></li>   
+ </div></H3>
+
+ <div class="hijo">
+	<form class="form-horizontal" action="{% url 'login' %}" method="post">{% csrf_token %}
+	
+		<div class="form-group">
+			<label class="col-sm-5 control-label text-right">
+			Empresa:
+			</label>
+			<div class="col-sm-2">
+	   		<input type="hidden"  class="form-control" name="codempresa" id="codempresa" />
+			<select type="text" style="width: 250px" name="codemp" id="grid-size">
+               {% for em in empresas %}
+				<option name="medicamento" class="" value="{{em.codEmpresa}}">	{{em.nomEmpresa}}  
+            	</option>   
+             	{% endfor %}
+            </select>	
+			</div>
+		</div>
+	
+		<div class="form-group">
+		<div class="col-sm-12 text-center">
+		<input type="submit" class="btn btn-primary" value="Iniciar sesión" />
+		</div>
+		</div>
+		<!--si no hubiere selecionado una empresa y quisiera ingresar a alguna funcion del sistema este error le sera mostrado  -->
+		{% if mensaje %}
+		<div class="alert alert-danger" role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Error:</span>
+     	{{mensaje}}
+     	 </div>
+     	{% endif %}
+	</form>
+ </div>

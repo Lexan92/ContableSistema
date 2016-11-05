@@ -1,0 +1,35 @@
+
+<<!-- link rel="stylesheet" href="/static/css/style.css">
+<h3> catalogo de cuentas </h3>
+ -->  <form class="form-horizontal" action="{% url 'importar-nuevo' %}" method="post">
+  <div class="hijo">
+     <label class="col-sm-3 control-label text-right">
+    Empresa:{{empresa}}
+	<!-- Empresa:{{cat.empresa}} -->
+			</label>
+  
+   {% for t in empresa.getTipos %} 
+    <div class="col-sm-3 text-left">
+		{{t}}  
+	    <!-- {{t.codTipo}} : {{t.nomTipo}}   -->
+    </div>
+        {% for r in t.getRubros %}
+        <div class="col-sm-3  text-left">
+			{{r}} 
+			<!-- {{r.codRubro}} : {{r.nomRubro}} -->
+	    </div>
+	         {% for c in r.cuentasPorRubro %}
+                <div class="col-sm-3  text-left">
+			    {{c}} ; grado:{{c.grado}}
+			    </div>
+	        {% endfor %}
+	    {% endfor %}
+       
+	{% endfor %}		
+</div>
+                        <!-- <div class="form-group">
+                        <div class="col-sm-12 text-center">
+                        <a href="" class="btn btn-default">Regresar</a>
+                        </div>
+                        </div>
+                        </form> -->

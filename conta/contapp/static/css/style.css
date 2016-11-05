@@ -1,0 +1,24 @@
+.hijo {
+ position: absolute;
+ left: 50%;
+ top: 50%;
+ /*width: 400px;
+ height: 200px;*/
+ border-radius:  10px;
+ border-color: black;
+ margin: -100px 0 0 -200px;
+}
+.hijo.dos {
+ padding-top: 20px;
+ 
+ }
+.menu {
+ position: absolute;
+ left: 50%;
+ top: 25%;
+ /*width: 400px;
+ height: 200px;*/
+ border-radius:  10px;
+ border-color: black;
+ margin: -100px 0 0 -200px;
+}

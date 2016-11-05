@@ -1,0 +1,86 @@
+<html>
+<link rel="stylesheet" href="/static/css/style.css">
+<HEAD>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script>
+      $(document).ready(function(){
+          $('#consulta').click(function(){
+            $("#contenido").load('{% url 'queryCatalogo' %}');
+            // $("#contenido").load('/conta/Catalogo');
+                         });
+                     });
+    </script>
+     <TITLE>Anyadir Filas Dinámicamente en HTML by jotaerre.net</TITLE>
+
+     <SCRIPT language="javascript">
+
+          function addRow(tableID)
+      {
+               var table = document.getElementById(tableID);
+               var rowCount = table.rows.length;
+               var row = table.insertRow(rowCount);
+               //se crea una varible celda y .type define q tipo sera
+               var cell1 = row.insertCell(0);
+               var element1 = document.createElement("input");
+               element1.type = "checkbox";
+               cell1.appendChild(element1);
+
+               var cell2 = row.insertCell(1);
+               var element2 = document.createElement("input");
+               element2.type = "text";
+               cell2.appendChild(element2);
+
+               var cell3 = row.insertCell(2);
+               var element3 = document.createElement("input");
+               element3.type = "text";
+               cell3.appendChild(element3);
+      }
+          function deleteRow(tableID)
+      {
+          try {
+               var table = document.getElementById(tableID);
+               var rowCount = table.rows.length;
+               for(var i=0; i<rowCount; i++)
+                  {
+                    var row = table.rows[i];
+                    var chkbox = row.cells[0].childNodes[0];
+                    if(null != chkbox && true == chkbox.checked) 
+                    {
+                         table.deleteRow(i);
+                         rowCount--;
+                         i--;
+                    }
+                  }
+
+               }catch(e) {alert(e);}
+      }
+     </SCRIPT>
+
+</HEAD>
+
+<BODY>
+     <label class="col-sm-3 control-label text-right">
+  Empresa:{{empresa}}
+      </label>
+    <div class="menu">
+        <li class="menu-item current"><a href="/conta/home/">HOME
+        </a></li>
+        <li class="menu-item"><a href="/conta/Importacion/">Importar catalogo</a></li>
+        <li class="menu-item"><a href="#" id="consulta">Consultar catalogo catalogo</a></li>
+    
+     </div>
+    <!-- <div class="hijo">
+     <INPUT type="button" value="Add Row" onclick="addRow('dataTable');" />
+     <INPUT type="button" value="Delete Row" onclick="deleteRow('dataTable');" />
+     <TABLE id="dataTable" width="350px" border="1">
+         
+     </TABLE>
+     </div> -->
+     <div id ="contenido">
+     </div>
+
+ 
+
+</BODY>
+
+</html>

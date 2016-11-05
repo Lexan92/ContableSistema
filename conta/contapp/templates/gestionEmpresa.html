@@ -1,0 +1,15 @@
+<link rel="stylesheet" href="/static/css/style.css">
+<h1>GESTION DE EMPRESA</h1>
+  
+    <form class="form-horizontal" action="{% url 'gestionEmpresa' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+	<div class="hijo">
+        <table>
+        {{ form.as_table }}
+        </table>
+   
+    <input type="hidden" id="codEmpresa" name="codEmpresa" value="{{empresa.codEmpresa}}" />
+    <div class="form-group">
+    <div class="col-sm-12 text-center">
+    <input type="submit" class="btn btn-primary" value="ENVIAR " />
+    </div></div></div>
+    </form>
