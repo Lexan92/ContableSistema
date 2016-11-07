@@ -1,4 +1,12 @@
 <link rel="stylesheet" href="/static/css/style.css">
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../static/bootstrap/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="../static/bootstrap/css/estilos.css">
+
+
 <h1>GESTION DE EMPRESA</h1>
   
     <form class="form-horizontal" action="{% url 'gestionEmpresa' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
@@ -12,4 +20,21 @@
     <div class="col-sm-12 text-center">
     <input type="submit" class="btn btn-primary" value="ENVIAR " />
     </div></div></div>
+
+
+    <div class="col-xs-3">
+   <div class="thumbnail">
+      <img src="../static/img/archive.png" alt="imagen">
+      <div class="caption">
+          <h3>
+              {{empresa.nomEmpresa}}
+          </h3>
+              <p>Empresa de prueba</p>
+          <p>
+          <a href="#" class="btn btn-primary">Abrir</a> 
+          <a href="#" class="btn btn-default">Editar</a>
+          </p>
+      </div>
+   </div>
+ </div>
     </form>
