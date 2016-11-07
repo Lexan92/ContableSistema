@@ -1,5 +1,26 @@
-<link rel="stylesheet" href="/static/css/style.css">
-<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+{%extends "Base.html"%}
+
+{% load staticfiles%}
+
+{%block css %}
+<!--<link rel="stylesheet" href="{% static 'css/style.css' %}"/>-->
+    {%endblock%}
+
+{%block opcionesmenu %}
+                    <li role="presentation" class="active"><a href="#">Home</a></li>
+                    <li role="presentation"><a href="#">Registro</a></li>
+                    <li role="presentation"><a href="#">Libros</a></li>
+                    <li role="presentation"><a href="#">Opcion 3</a></li>
+                    <li role="presentation"><a href="#">Opcion 4</a></li>
+                    <li role="presentation"><a href="#">Cerrar Sesion</a></li>
+                    {%endblock %}
+
+{%block areaTrabajo%}
+<div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
 <h1>Iniciar sesión</h1>
 
 <H3>
@@ -41,3 +62,15 @@
      	{% endif %}
 	</form>
  </div>
+
+ </div>
+ </div>
+ </div>
+ </div>
+
+{%endblock%}
+
+{% block js%}
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    {%endblock%}
+

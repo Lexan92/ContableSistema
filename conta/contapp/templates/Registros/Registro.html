@@ -1,33 +1,67 @@
 {%extends "Base.html"%}
-<html>
-<!--<link rel="stylesheet" href="/static/css/style.css">-->
+{% load staticfiles%}
+{%block css %}
+{%endblock%}
 
 {%block opcionesmenu %}
-                    <li role="presentation"><a href="{% url 'login' %}">Home</a></li>
-                    <li role="presentation"><a href="{% url 'Registro' %}  ">Registro</a></li>
+                    <li role="presentation" ><a href="#">Home</a></li>
+                    <li role="presentation" class="active"><a href="#">Registro</a></li>
                     <li role="presentation"><a href="#">Libros</a></li>
-                    <li role="presentation"><a href="{% url 'Catalogo' %}">Catalogo 3</a></li>
+                    <li role="presentation"><a href="#">Opcion 3</a></li>
                     <li role="presentation"><a href="#">Opcion 4</a></li>
                     <li role="presentation"><a href="#">Cerrar Sesion</a></li>
                     {%endblock %}
+
+ {%block barraLateral%} 
+                <li class="sidebar-brand"><a href="#">Opciones: Registro</a></li>
+                <li><a href="#">Opcion 1</a></li>
+                <li><a href="#">Opcion 2</a></li>
+                <li><a href="#">Opcion 3</a></li>
+                <li><a href="#">Opcion 4</a></li>
+                <li><a href="#">Opcion 5</a></li>
+                <li><a href="#">Opcion 6</a> </li>
+                <li><a href="#">Opcion 7</a></li>
+{%endblock%}
+
 
 {%block areaTrabajo%}
 <div id="page-content-wrapper">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
+                       
 
-                        <h1>Bienvenido</h1>
+
+     <label class="">
+  Empresa:{{empresa}}
+      </label>
+     <!--<div class="menu">
+        <li class="menu-item current"><a href="/conta/home/">HOME
+        </a></li>
+        <li class="menu-item"><a href="/conta/Importacion/">Importar catalogo</a></li>
+        <li class="menu-item"><a href="#" id="consulta">Consultar catalogo catalogo</a></li>
+    
+     </div>-->
+    <div class="hijo">
+     <INPUT type="button" value="Add Row" onclick="addRow('dataTable');" />
+     <INPUT type="button" value="Delete Row" onclick="deleteRow('dataTable');" />
+     <TABLE id="dataTable" width="350px" border="1">
+         
+     </TABLE>
+     </div> 
+     <div id ="contenido">
+     </div>
+
+ 
 
 
-    </div>
  </div>
  </div>
  </div>
-
-{%endblock%}                    
-<HEAD>
-    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+ </div>
+{%endblock%}
+{% block js%}
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <script>
       $(document).ready(function(){
           $('#consulta').click(function(){
@@ -36,8 +70,7 @@
                          });
                      });
     </script>
-     <TITLE>Anyadir Filas Dinámicamente en HTML by jotaerre.net</TITLE>
-
+     
      <SCRIPT language="javascript">
 
           function addRow(tableID)
@@ -82,31 +115,4 @@
       }
      </SCRIPT>
 
-</HEAD>
-
-<BODY>
-     <label class="col-sm-3 control-label text-right">
-  Empresa:{{empresa}}
-      </label>
-    <div class="menu">
-        <li class="menu-item current"><a href="/conta/home/">HOME
-        </a></li>
-        <li class="menu-item"><a href="/conta/Importacion/">Importar catalogo</a></li>
-        <li class="menu-item"><a href="#" id="consulta">Consultar catalogo catalogo</a></li>
-    
-     </div>
-    <!-- <div class="hijo">
-     <INPUT type="button" value="Add Row" onclick="addRow('dataTable');" />
-     <INPUT type="button" value="Delete Row" onclick="deleteRow('dataTable');" />
-     <TABLE id="dataTable" width="350px" border="1">
-         
-     </TABLE>
-     </div> -->
-     <div id ="contenido">
-     </div>
-
- 
-
-</BODY>
-
-</html>
+{%endblock%}

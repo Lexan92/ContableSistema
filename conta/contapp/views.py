@@ -41,7 +41,7 @@ def gestionEmpresa(request):
             return render(request, "Home.html", {'mensaje': '','empresas':empresa.objects.all()})
     else:
         form=FormEmpresa()
-        return render(request, "gestionEmpresa.html", {'form': form})    
+        return render(request, "Empresa/gestionEmpresa.html", {'form': form})    
 
 def queryCatalogo(request):
     try:
@@ -49,7 +49,7 @@ def queryCatalogo(request):
     except Exception :
         emp=""    
     if emp:
-        return render(request,'importExito.html',{'empresa': emp}) 
+        return render(request,"Catalogo/importExito.html",{'empresa': emp}) 
     
 
 
@@ -76,14 +76,14 @@ def importar(request):
             catalogoImportado=ImpCatalago(emp,dataReader,nombreArchivo)
             catalogoImportado.importar()
             # ordenCat=CatalogoCuentas(emp)
-            return render(request,'importExito.html',{'empresa': emp})
+            return render(request,'Catalogo/importExito.html',{'empresa': emp})
             # return render(request,'importExito.html',{'cat': ordenCat})
         elif request.session.has_key('codemp') == False: #Usuario no ha iniciado sesión
             return render(request, "Home.html", {'mensaje': 'Debe selecionar una empresar para iniciar','empresas':empresa.objects.all(),})
     # confirma si  existe una sesioncon una empresa
     elif emp:
         form = FormImportacion()#formulario para la importacion
-        return render(request,'ImportarArchivo.html',{'form': form,'empresa': emp})
+        return render(request,'Catalogo/ImportarArchivo.html',{'form': form,'empresa': emp})
     else:
         return render(request, "Home.html", {'mensaje': 'Debe selecionar una empresa para iniciar','empresas':empresa.objects.all(),})    
 
@@ -118,12 +118,15 @@ def importar(request):
 #             # if (not errorC.mensaje) and  (not errorC.tipo):
 #             #     return render(self.request,'tabla_dinamica.html')
 #             # else:
-#             # 	return render(self.request,'ErrorMigracion.html', {'err': errorC})
-       
+#             # 	
+def Empresa(request):
+    return render(request,'ErrorMigracion.html')
 
-
-
-
+def Catalogo(request):
+    return render(request,'Catalogo/Catalogo.html')
+ 
+def Registro(request):
+     return render(request,'Registros/Registro.html')
 
 def index(request):
     return HttpResponse("Hello, world. You're at the polls index.")

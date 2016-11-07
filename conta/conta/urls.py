@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from contapp.views import loginRender,importar,gestionEmpresa,queryCatalogo
+from contapp.views import loginRender,importar,gestionEmpresa,queryCatalogo,Catalogo,Registro
 # from contapp.views import CrearImportarArchivoView,loginRender,importa
 
 urlpatterns = [
@@ -24,7 +24,10 @@ urlpatterns = [
     url(r'^conta/home/$', loginRender, name="login",),
     url(r'^conta/Importacion/$', importar, name="importar-nuevo",),
     url(r'^conta/GestionEmpresa/$', gestionEmpresa, name="gestionEmpresa",),
-    url(r'^conta/Catalogo/', queryCatalogo, name="queryCatalogo",),
+    url(r'^conta/Catalogo/', Catalogo, name="Catalogo",),
+    url(r'^conta/Registro/', Registro, name="Registro",),
+    #url(r'^conta/Catalogo/', queryCatalogo, name="queryCatalogo",),
+    url(r'^conta/Catalogo/consulta', queryCatalogo, name="queryCatalogo",),
     # url(r'^conta/Importacion/$', CrearImportarArchivoView.as_view(), name="importar-nuevo",),
     # url(r'^Medicamentos/Login/$', loginRender, name="login",),
     # url(r'^$', CrearImportarArchivoView.as_view(), name="importar-nuevo",),
