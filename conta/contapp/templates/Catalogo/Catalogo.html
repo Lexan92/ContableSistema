@@ -24,8 +24,8 @@
 
  {%block barraLateral%} 
                 <li class="sidebar-brand"><a href="#">Opciones: catalago</a></li>
-                <li><a href="/conta/Importacion/">importar</a></li>
-                <li><a href="/conta/Catalogo/consulta" id="">consultar catalogo</a></li>
+                <li><a href="{% url 'importar-nuevo' %}">importar</a></li>
+                <li><a href="{% url 'consultaCatalogo' %}" id="">consultar catalogo</a></li>
                 <li><a href="#">Opcion 3</a></li>
                 <li><a href="#">Opcion 4</a></li>
                 <li><a href="#">Opcion 5</a></li>

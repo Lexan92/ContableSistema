@@ -1,0 +1,43 @@
+<div class="alert alert-danger" role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">mensaje:</span>
+     	{{msg}}
+  </div>
+
+
+
+
+  {% for c in cod %} 
+    <div class="col-sm-3 text-left">
+  	{{c}} 
+    </div>
+	{% endfor %}
+  {% for c in debe %} 
+    <div class="col-sm-3 text-left">
+    {{c}} 
+    </div>
+  {% endfor %}
+  {% for c in haber%} 
+    <div class="col-sm-3 text-left">
+    {{c}} 
+    </div>
+  {% endfor %}
+  
+  {% for c in partidas %} 
+  <div>---------------------------------------</div>
+    <div class="col-sm-3 text-left">
+    {{c}} 
+    </div>
+        {% for i in c.getMovs %} 
+        <div class="col-sm-3 text-left">
+        {{i}} 
+        </div>
+        {% endfor %}
+    <div>
+    {{c.concepto}}
+    </div>    
+  {% endfor %}
+
+
+
+</div>

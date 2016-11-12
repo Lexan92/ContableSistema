@@ -78,14 +78,15 @@ WSGI_APPLICATION = 'conta.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'misitio',#base de datos
+        'NAME': 'conta',#base de datos
         'USER': 'postgres',#usuario 
-        'PASSWORD': 'administrador',#contrsenia 
+        'PASSWORD': 'dante',#contrsenia 
         'HOST': 'localhost',#no modificar
         'PORT': '5432',#no modificar
     }
     
 }
+
 
 
 # Password validation
