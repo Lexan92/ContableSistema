@@ -1,0 +1,54 @@
+{%extends "Base.html"%}
+{% load staticfiles%}
+{%block css %}
+
+{%endblock%}
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script>
+      $(document).ready(function(){
+          $('#consulta').click(function(){
+           // $("#contenido").load('{% url 'queryCatalogo' %}');
+             $("#contenido").load('/conta/Catalogo/consulta');
+                         });
+                     });
+    </script>
+
+{%block opcionesmenu %}
+                    <li role="presentation" class="active"><a href="#">Home</a></li>
+                    <li role="presentation"><a href="#">Registro</a></li>
+                    <li role="presentation"><a href="#">Libros</a></li>
+                    <li role="presentation"><a href="#">Opcion 3</a></li>
+                    <li role="presentation"><a href="#">Opcion 4</a></li>
+                    <li role="presentation"><a href="#">Cerrar Sesion</a></li>
+                    {%endblock %}
+
+ {%block barraLateral%} 
+                <li class="sidebar-brand"><a href="#">Opciones: catalago</a></li>
+                <li><a href="{% url 'importar-nuevo' %}">importar</a></li>
+                <li><a href="{% url 'consultaCatalogo' %}" id="">consultar catalogo</a></li>
+                <li><a href="#">Opcion 3</a></li>
+                <li><a href="#">Opcion 4</a></li>
+                <li><a href="#">Opcion 5</a></li>
+                <li><a href="#">Opcion 6</a> </li>
+                <li><a href="#">Opcion 7</a></li>
+{%endblock%}
+
+
+{%block areaTrabajo%}
+<div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+
+                         <div id ="contenido">
+                          </div>
+ </div>
+ </div>
+ </div>
+ </div>
+{%endblock%}
+{% block js%}
+
+{%endblock%}
+
+
