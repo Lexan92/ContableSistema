@@ -1,4 +1,33 @@
-<link rel="stylesheet" href="/static/css/style.css">
+{%extends "Base.html"%}
+
+{% load staticfiles%}
+
+{%block css %}
+<!--<link rel="stylesheet" href="{% static 'css/style.css' %}"/>-->
+{%endblock%}
+
+{%block opcionesmenu %}
+                    <li role="presentation" class="active"><a href="#">Home</a></li>
+                    <li role="presentation"><a href="#">Registro</a></li>
+                    <li role="presentation"><a href="#">Libros</a></li>
+                    <li role="presentation"><a href="#">Opcion 3</a></li>
+                    <li role="presentation"><a href="#">Opcion 4</a></li>
+                    <li role="presentation"><a href="#">Cerrar Sesion</a></li>
+                    {%endblock %}
+
+
+{%block barraLateral%}
+                
+              
+                <div class="list-group">
+                    <a href="/conta/GestionEmpresa/" class="list-group-item active">
+                    <span class="glyphicon glyphicon-plus-sign"></span> Nueva Empresa
+                    </a> 
+
+
+                    {%endblock%}
+
+{%block areaTrabajo%}
 <h1>Importar catalogo de cuentas</h1>
     <label class="col-sm-3 control-label text-right">
   Empresa:{{empresa}}
@@ -15,3 +44,5 @@
     <input type="submit" class="btn btn-primary" value="ENVIAR ARCHIVO" />
     </div></div></div>
     </form>
+
+    {%endblock areaTrabajo%}
