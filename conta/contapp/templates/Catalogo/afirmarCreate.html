@@ -1,0 +1,44 @@
+<form  id="myformu" name="fvalida"  method="POST" action="{% url 'createUpdateC' %}">{% csrf_token %}
+          <!--  <input type="hidden" id="hdnAccion" name="hdnAccion" value="0" />
+           <input type="hidden" id="hdnValor" name="hdnValor" value="0" /> -->
+            <p>
+               <label for="">Rubro</label>
+               <input  id="cns" type="text" name="" value="{{rubro.getCodRubro}}  {{rubro.nomRubro}}" >           
+               <input type="hidden" id="idrubro" name="idrubro" value="{{rubro.idRubro}}" />
+           </p>
+          
+           <p class="right">
+               <label for="">cuenta Padre</label>
+               <input  id="cns" type="text" name="cuentaPadre" value="{{dad.getCodCuenta}}  {{dad.nomCuenta}}" >
+               <input type="hidden" id="idpadre" name="idpadre" value="{{dad.idCuenta}}" />
+               </p>
+          
+           <p class="left">
+               <label for="">codigo de cuenta nueva</label>
+               <input  id="" type="" name="" value="{{codnext_str}}" placeholder="">
+               <input type="hidden" id="codnext" name="codnext" value="{{codnext}}" />
+           </p>
+           <p>
+               <label for="">nombre de cuenta nueva</label>
+               <input  type="text" name="nombreCuenta" value="{{nomcuenta}}" required="">
+               <!-- <input  type="text" name="" value="" required="">
+               <input type="hidden" id="nomcuenta" name="nomcuenta" value="{{nomcuenta}}" /> -->
+           </p>
+           <p>
+               <label for="">grado de cuenta</label>
+               <input disabled type="text" id=""name="" value="{{grado}}" required="">
+               <input type="hidden" id="grado" name="grado" value="{{grado}}" />
+           </p>
+           
+					 <div >
+            <input type="submit" class="button" name="insert" value="guardar" onclick="">
+            
+						<!-- <input type="hidden"  name="actual" value="0" id="actual">
+            <input type="hidden" id="Accion" name="Accion" value="0" > -->
+        </form>
+
+        <input type="submit" value="cancelar" form="fo">
+        <form id="fo"action="{% url 'Catalogo' %}">
+        </form>
+
+        <!-- <input type="button" class="button" name="regresar" value="cancelar" onclick="{% url 'Catalogo' %}"> -->

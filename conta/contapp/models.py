@@ -1,6 +1,7 @@
 from django.db import models
 from datetime import datetime, date, time, timedelta
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.db.models import Max
 # Create your models here.
 # por conveniencia no se manejara la clase fecha sino que usara 
 
@@ -95,7 +96,24 @@ class rubCuenta(models.Model):
             for c in self.getCuentasMayor():
                 l=self.listCuentasMenor(c)
                 lst=lst+l
-            return lst    
+            return lst
+ #retorna el codigo de la siguiente cuenta de mayor
+    def getCodNextMayor(self):
+        cuentasMayores=cuenta.objects.filter(idRubro=self.idRubro).filter(idCuentaPadre__isnull=True).order_by('codCuenta')
+        codlastMayor=cuentasMayores.aggregate(Max('codCuenta'))
+        if codlastMayor.get("codCuenta__max"):
+            CodNextMayor=(codlastMayor.get("codCuenta__max"))+1
+        else:
+            CodNextMayor=1       
+        return CodNextMayor
+        
+# siguiente hijo en formato string
+    def getCodNextMayor_str(self):
+        CodNext=self.getCodNextMayor()
+        # sons=cuenta.objects.filter(idCuentaPadre=self.idCuenta).order_by('codCuenta')
+        # codlastson=sons.aggregate(Max('codCuenta'))
+        CodNextMayor= (str(CodNext).zfill(2))
+        return CodNextMayor    
 
     def __str__(self):
         return self.idTipo.codEmpresa.nomEmpresa+" // "+ (str(self.idTipo.codTipo))+(str(self.codRubro))+" "+self.nomRubro
@@ -126,9 +144,33 @@ class cuenta(models.Model):
     def getSons(self):
         sons=cuenta.objects.filter(idCuentaPadre=self.idCuenta).order_by('codCuenta')
         return sons
+# siguiente hijo en formato int
+    def getCodNextSon(self):
+        sons=cuenta.objects.filter(idCuentaPadre=self.idCuenta).order_by('codCuenta')
+        codlastson=sons.aggregate(Max('codCuenta'))
+        if codlastson.get("codCuenta__max"):
+            CodNextSon=(codlastson.get("codCuenta__max"))+1
+        else:
+            CodNextSon=1       
+        return CodNextSon
+# siguiente hijo en formato string
+    def getCodNextSon_str(self):
+        CodNext=self.getCodNextSon()
+        # sons=cuenta.objects.filter(idCuentaPadre=self.idCuenta).order_by('codCuenta')
+        # codlastson=sons.aggregate(Max('codCuenta'))
+        CodNextSon= (str(CodNext).zfill(2))
+        return CodNextSon
+
     def haveSons(self):
         sons=cuenta.objects.filter(idCuentaPadre=self.idCuenta).order_by('codCuenta')
         if sons:
+            return True
+        else:
+            return False
+#valida si tiene movimientos, si es true entonces no puede tener hijas  
+    def haveMoves(self):
+        moves=movimiento.objects.filter(idCuenta=self.idCuenta).order_by('idCuenta')
+        if moves:
             return True
         else:
             return False
