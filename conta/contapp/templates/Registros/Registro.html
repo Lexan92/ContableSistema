@@ -14,9 +14,9 @@
 
  {%block barraLateral%} 
                 <li class="sidebar-brand"><a href="#">Opciones: Registro</a></li>
-                <li><a href="#">Opcion 1</a></li>
-                <li><a href="#">Opcion 2</a></li>
-                <li><a href="#">Opcion 3</a></li>
+                <li><a href="{% url 'consultaPartida' %}">consultar partidas</a></li>
+                <li><a href="">Opcion consultar</a></li>
+                <li><a href="{% url 'Registro' %}">Opcion 3</a></li>
                 <li><a href="#">Opcion 4</a></li>
                 <li><a href="#">Opcion 5</a></li>
                 <li><a href="#">Opcion 6</a> </li>
@@ -43,14 +43,56 @@
     
      </div>-->
     <div class="hijo">
-     <INPUT type="button" value="Add Row" onclick="addRow('dataTable');" />
-     <INPUT type="button" value="Delete Row" onclick="deleteRow('dataTable');" />
-     <TABLE id="dataTable" width="350px" border="1">
-         
-     </TABLE>
+     <form method="post" action="{% url 'regPartida' %}" id="fo3" name="fo3" >{% csrf_token %}
+        <INPUT type="number" min="1"  value=""  id="numeroP" name="numeroP">
+        <input type="date" value="" id="fechaP" required name="fechaP">
+        <TABLE id="dataTable" class="table" border="">
+        </TABLE>
+        <label>concepto</label>
+        <input type="text"   name="concepto" required  value="" />
+        <!-- <input type="submit"   name="mysubmit" value="Enviar" /> -->
+        
+        </form>
+        <select id="insertcodigo" class="insertcodigo" data-live-search="true" name="insertcodigo" onChange="valida()">
+            {% for t in empresa.getTipos %} 
+            <option disabled >
+               {{t.codTipo}}    {{t.nomTipo}}  
+             </option>
+              {% for r in t.getRubros %}
+              <option disabled>
+                {{r.getCodRubro}}    {{r.nomRubro}} 
+              </option>
+                  {% for c in r.cuentasPorRubro %}
+                    {% if c.haveSons %}
+                      <option disabled >
+                      {{c.getCodCuenta}}    {{c.nomCuenta}}
+                      </option>
+                    {% else %}
+                      <option value="{{c.idCuenta}}">
+                      {{c.getCodCuenta}}    {{c.nomCuenta}}
+                      </option>  
+                    {% endif %}                 
+                  {% endfor %}
+                {% endfor %}      
+              {% endfor %}
+            
+                
+        </select>
+        
+        <INPUT  type="number" min="0" required value="" id="insertdebe" NAME="" form="fo">
+        <INPUT  type="number" min="0" required value="" id="inserthaber" NAME="" form="fo">
+        <INPUT type="button" value="Agregar" onclick="addRow('dataTable');" />
+        <INPUT type="button" value="Borrar" onclick="deleteRow('dataTable');" />
      </div> 
-     <div id ="contenido">
-     </div>
+        <input type="submit"   name="mysubmit" value="Enviar"  form="fo3" />
+        {% if msg %} 
+        <div class="alert alert-danger" role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        
+        <span class="sr-only">mensaje:</span>
+         {{msg}}
+        </div>
+        {% endif %} 
 
  
 
@@ -61,58 +103,10 @@
  </div>
 {%endblock%}
 {% block js%}
+<script src="{% static 'bootstrap/js/miscrip.js'%}"></script>
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-    <script>
-      $(document).ready(function(){
-          $('#consulta').click(function(){
-            $("#contenido").load('{% url 'queryCatalogo' %}');
-            // $("#contenido").load('/conta/Catalogo');
-                         });
-                     });
-    </script>
+
      
-     <SCRIPT language="javascript">
-
-          function addRow(tableID)
-      {
-               var table = document.getElementById(tableID);
-               var rowCount = table.rows.length;
-               var row = table.insertRow(rowCount);
-               //se crea una varible celda y .type define q tipo sera
-               var cell1 = row.insertCell(0);
-               var element1 = document.createElement("input");
-               element1.type = "checkbox";
-               cell1.appendChild(element1);
-
-               var cell2 = row.insertCell(1);
-               var element2 = document.createElement("input");
-               element2.type = "text";
-               cell2.appendChild(element2);
-
-               var cell3 = row.insertCell(2);
-               var element3 = document.createElement("input");
-               element3.type = "text";
-               cell3.appendChild(element3);
-      }
-          function deleteRow(tableID)
-      {
-          try {
-               var table = document.getElementById(tableID);
-               var rowCount = table.rows.length;
-               for(var i=0; i<rowCount; i++)
-                  {
-                    var row = table.rows[i];
-                    var chkbox = row.cells[0].childNodes[0];
-                    if(null != chkbox && true == chkbox.checked) 
-                    {
-                         table.deleteRow(i);
-                         rowCount--;
-                         i--;
-                    }
-                  }
-
-               }catch(e) {alert(e);}
-      }
-     </SCRIPT>
+     
 
 {%endblock%}

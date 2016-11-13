@@ -126,6 +126,13 @@ class cuenta(models.Model):
     def getSons(self):
         sons=cuenta.objects.filter(idCuentaPadre=self.idCuenta).order_by('codCuenta')
         return sons
+    def haveSons(self):
+        sons=cuenta.objects.filter(idCuentaPadre=self.idCuenta).order_by('codCuenta')
+        if sons:
+            return True
+        else:
+            return False
+
     def __str__(self):
         return (str(self.idCuenta))+"//"+self.getCodCuenta()+" "+self.nomCuenta
         # return (str(self.idCuenta))+" "+(str(self.codCuenta).zfill(2))+" "+self.nomCuenta
@@ -137,11 +144,14 @@ class partida(models.Model):
     codEmpresa=models.ForeignKey(empresa, on_delete=models.CASCADE)
     # idFecha=models.ForeignKey(fecha, on_delete=models.CASCADE)
     fecha=models.DateField(default=datetime.now)
+    concepto=models.TextField(null=True,blank=True)
     def getMovs(self):
         movs=movimiento.objects.filter(idPartida=self.idPartida)
         return movs
     def __str__(self):
-        return " Partida n: "+str(self.numPartida)
+        return " Partida n: "+(str(self.numPartida))+" fecha:"+(str(self.fecha))+" empresa"+(str(self.codEmpresa))
+    # def __str__(self):
+    #     return " Partida n: "+str(self.numPartida)
 
 
 
@@ -152,7 +162,9 @@ class movimiento(models.Model):
     idPartida=models.ForeignKey(partida, on_delete=models.CASCADE)
     idCuenta=models.ForeignKey(cuenta,on_delete=models.CASCADE,default=1)
     def __str__(self):
-        return " movimeinto n: "+str(self.idMovimiento)
+        return " codigocuenta : "+(self.idCuenta.getCodCuenta())+" debe:"+(str(self.debe))+" haber:"+(str(self.haber))
+    # def __str__(self):
+    #     return " movimeinto n: "+str(self.idMovimiento)
 
 class impArchivo(models.Model):
     idImpArchivo=models.AutoField(primary_key=True)
