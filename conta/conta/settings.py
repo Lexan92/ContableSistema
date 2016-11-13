@@ -80,7 +80,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'misitio',#base de datos
         'USER': 'postgres',#usuario 
-        'PASSWORD': 'administrador',#contrsenia 
+        'PASSWORD': 'admin',#contrsenia 
         'HOST': 'localhost',#no modificar
         'PORT': '5432',#no modificar
     }

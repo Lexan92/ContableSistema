@@ -32,7 +32,8 @@
  <div class="hijo">
 	<form class="form-horizontal" action="{% url 'login' %}" method="post">{% csrf_token %}
 	
-		<div class="form-group">
+    
+		<!--<div class="form-group">
 			<label class="col-sm-5 control-label text-right">
 			Empresa:
 			</label>
@@ -45,13 +46,34 @@
              	{% endfor %}
             </select>	
 			</div>
-		</div>
+		</div>-->
+
+
+
+{% for em in empresas %}
+		<div class="col-xs-3">
+   <div class="thumbnail">
+      <img src="{% static 'img/archive.png'%}" alt="imagen">
+      <div class="caption">
+          <h3>
+              {{em.nomEmpresa}}
+          </h3>
+              <p>Empresa de prueba</p>
+          <p>
+              
+          <input type="submit" class="btn btn-primary" value="Iniciar sesión" />
+          <a href="#" class="btn btn-default">Editar</a>
+          </p>
+      </div>
+   </div>
+ </div>
+ {% endfor %}
 	
-		<div class="form-group">
+		<!--<div class="form-group">
 		<div class="col-sm-12 text-center">
 		<input type="submit" class="btn btn-primary" value="Iniciar sesión" />
 		</div>
-		</div>
+		</div>-->
 		<!--si no hubiere selecionado una empresa y quisiera ingresar a alguna funcion del sistema este error le sera mostrado  -->
 		{% if mensaje %}
 		<div class="alert alert-danger" role="alert">
