@@ -9,7 +9,13 @@
 //        // $("#contenido").load('/conta/Catalogo');
 // }                     
 
+function putnewcod(codPadre,codNextSon){
+  // var nextson = document.getElementById(cns);
+  // nextson.value = codPadre+codNextSon;
+  // document.getElementById(cns)=nextson;
+  document.getElementById(cns).value=codPadre+codNextSon;
 
+}
  function addRow(tableID)
       {
                var table = document.getElementById(tableID);

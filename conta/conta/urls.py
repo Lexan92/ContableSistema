@@ -28,7 +28,7 @@ urlpatterns = [
 	# url(r'^contapp/', include('contapp.urls')),
     url(r'^admin/', admin.site.urls),
 
-    
+
 # ----------------------------EMPRESA-------------------------------------------
     url(r'^conta/home/$', loginRender, name="login",),
     url(r'^conta/GestionEmpresa/$', gestionEmpresa, name="gestionEmpresa",),
@@ -42,6 +42,8 @@ urlpatterns = [
     url(r'^conta/Catalogo/$', Catalogo, name="Catalogo",),
     url(r'^conta/Importacion/$', importar, name="importar-nuevo",),
     url(r'^conta/Catalogo/consulta/$', consultaCatalogo, name="consultaCatalogo",),
+    url(r'^conta/Catalogo/GestionCuenta/$', createUpdateC, name="createUpdateC",),
+    url(r'^conta/Catalogo/GestionCuenta/confirmar/$', confirmarcreate, name="confirmarcreate",),
 
 
 #------------------------------LIBROS--------------------------------------------

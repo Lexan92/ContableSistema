@@ -4,23 +4,32 @@
 {%endblock%}
 
 {%block opcionesmenu %}
-                    <li role="presentation" ><a href="#">Home</a></li>
+                    <li role="presentation" ><a href="{% url 'login' %}  ">Home</a></li>
                     <li role="presentation" class="active"><a href="#">Registro</a></li>
-                    <li role="presentation"><a href="#">Libros</a></li>
-                    <li role="presentation"><a href="#">Opcion 3</a></li>
-                    <li role="presentation"><a href="#">Opcion 4</a></li>
+                   
                     <li role="presentation"><a href="#">Cerrar Sesion</a></li>
                     {%endblock %}
 
  {%block barraLateral%} 
-                <li class="sidebar-brand"><a href="#">Opciones: Registro</a></li>
+                <!--<li class="sidebar-brand"><a href="#">Opciones: Registro</a></li>
                 <li><a href="{% url 'consultaPartida' %}">consultar partidas</a></li>
                 <li><a href="">Opcion consultar</a></li>
                 <li><a href="{% url 'Registro' %}">Opcion 3</a></li>
                 <li><a href="#">Opcion 4</a></li>
                 <li><a href="#">Opcion 5</a></li>
                 <li><a href="#">Opcion 6</a> </li>
-                <li><a href="#">Opcion 7</a></li>
+                <li><a href="#">Opcion 7</a></li>-->
+
+
+                <div class="list-group">
+                    <a href="#" class="list-group-item active">
+                    <span class="glyphicon glyphicon-home"></span>  {{empresa}}
+                    </a> 
+
+                   <div class="list-group">
+                    <a href="{% url 'consultaPartida' %}" class="list-group-item">
+                    <span class="glyphicon glyphicon-eye-open"></span>  Consultar Partidas
+                    </a>  
 {%endblock%}
 
 
@@ -32,9 +41,7 @@
                        
 
 
-     <label class="">
-  Empresa:{{empresa}}
-      </label>
+    
      <!--<div class="menu">
         <li class="menu-item current"><a href="/conta/home/">HOME
         </a></li>
@@ -46,10 +53,13 @@
      <form method="post" action="{% url 'regPartida' %}" id="fo3" name="fo3" >{% csrf_token %}
         <INPUT type="number" min="1"  value=""  id="numeroP" name="numeroP">
         <input type="date" value="" id="fechaP" required name="fechaP">
-        <TABLE id="dataTable" class="table" border="">
-        </TABLE>
-        <label>concepto</label>
+        <div class="table-responsive">
+        <TABLE id="dataTable" class="table table-hover" border="">
+          <label>concepto</label>
         <input type="text"   name="concepto" required  value="" />
+        </TABLE>
+        </div>
+        
         <!-- <input type="submit"   name="mysubmit" value="Enviar" /> -->
         
         </form>
@@ -94,15 +104,20 @@
         </div>
         {% endif %} 
 
+       <div>
+       </div>
+       <div>
+       </div>
+
+
  
-
-
  </div>
  </div>
  </div>
  </div>
 {%endblock%}
 {% block js%}
+
 <script src="{% static 'bootstrap/js/miscrip.js'%}"></script>
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 

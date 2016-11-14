@@ -1,5 +1,6 @@
 
-from contapp.models import  empresa, tipCuenta, rubCuenta, cuenta, partida, movimiento,impArchivo
+from contapp.models import *
+# from contapp.models import  empresa, tipCuenta, rubCuenta, cuenta, partida, movimiento,impArchivo
 from datetime import datetime, date, time, timedelta
 from django import forms
 
@@ -11,6 +12,58 @@ class FormEmpresa(forms.Form):
 class FormImportacion(forms.Form):
     archivo = forms.FileField()
 
+class cuentaMayor:
+    def __init__(self):
+        self.cuenta=cuenta()
+        self.listMoves=[]
+
+
+class rubroMayor():
+    def __init__(self):
+        self.rubro=rubCuenta()
+        self.listCuentasMayor=[]
+        
+
+class libroMayor:
+    def __init__(self,empresa ):
+        self.empresa=empresa
+
+    def getLibroPeriodo(self,anio,mes):
+        libro=[]
+#  lo que se devlovera sera una lista de rubros con cuentas de mayor 
+# y los movimientos de cada una de las cuentas
+        for t in empresa.getTipos():
+            for r in t.getRubros():
+                rubMayor=self.getRubroMayor(r,anio,mes)
+                libro.append(rubMayor)
+        return libro
+
+    def getRubroMayor(self,rub,anio,mes):
+        rubMayor=rubroMayor()
+        rubMayor.rubro=rub
+
+        for c in rubMayor.rubro.getCuentasMayor():
+            cuentMayor=self.getCuentaMayor(c,anio,mes)
+            rubMayor.listCuentasMayor.append(cuentMayor)
+        return rubMayor
+    
+    def getCuentaMayor(self,cuent,anio,mes):
+        cuentMayor=cuentaMayor()
+        cuentMayor.cuenta=cuent
+        pass
+
+
+
+
+
+
+
+
+
+
+
+    
+        
 
 
 class CatalogoCuentas:
@@ -223,3 +276,49 @@ class ImpCatalago:#name:importar catalogo
         for objTupla in self.archivo:
             self.evaCodigo(objTupla) 
           
+def SetMoneda(num, simbolo="US$", n_decimales=2):
+    # """Convierte el numero en un string en formato moneda
+    # SetMoneda(45924.457, 'RD$', 2) --> 'RD$ 45,924.46'     
+    # """
+    #con abs, nos aseguramos que los dec. sea un positivo.
+    n_decimales = abs(n_decimales)
+    
+    #se redondea a los decimales idicados.
+    num = round(num, n_decimales)
+
+    #se divide el entero del decimal y obtenemos los string
+    
+    num, dec = str(num).split(".") 
+            
+    # num, dec = str(num).split(".")
+
+    #si el num tiene menos decimales que los que se quieren mostrar,
+    #se completan los faltantes con ceros.
+    dec += "0" * (n_decimales - len(dec))
+    
+    #se invierte el num, para facilitar la adicion de comas.
+    num = num[::-1]
+    
+    #se crea una lista con las cifras de miles como elementos.
+    l = [num[pos:pos+3][::-1] for pos in range(0,50,3) if (num[pos:pos+3])]
+    l.reverse()
+    
+    #se pasa la lista a string, uniendo sus elementos con comas.
+    num = str.join(",", l)
+    d =num
+    # si numero negativo lo imprimira con parentesis
+    if d[0:2] == "-,":
+        # num = "-%s" % num[2:]
+        # d= num[2:]
+        d="("+num[2:]+"."+dec+")"
+    elif d[0] == "-":
+        d="("+num[1:]+"."+dec+")"
+    else:
+        d=d+"."+dec
+          
+    # #si no se especifican decimales, se retorna un numero entero.
+    # if not n_decimales:
+    #     return "%s" % (d)
+    # retorna valor en moneda     
+    return "%s" % (d)
+    # return "%s %s.%s" % (simbolo, num, dec)

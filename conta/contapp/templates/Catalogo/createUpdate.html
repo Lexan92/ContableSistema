@@ -1,0 +1,65 @@
+
+<form  id="myformu" name="fvalida"  method="POST" action="{% url 'confirmarcreate' %}">{% csrf_token %}
+           <input type="hidden" id="hdnAccion" name="hdnAccion" value="0" />
+           <input type="hidden" id="hdnValor" name="hdnValor" value="0" />
+            <p>
+               <label for="">Rubro</label>
+               <select type="text" style="width: 250px" name="idRubro" id="grid-size">
+               
+               {% for t in empresa.getTipos %}
+                  {% for r in t.getRubros %}
+               <option name="" class="" value="{{r.idRubro}}" >
+                {{r.getCodRubro}}  {{r.nomRubro}}
+               </option>		
+                 {% endfor %}
+                {% endfor %}
+               </select>
+                
+           </p>
+           <p class="right">
+               <label for="">cuenta Padre</label>
+               <select id="" class=""  name="idPadre" onChange="">
+               <option name="" class="" value="">
+               </option>
+              {% for t in empresa.getTipos %} 
+               <option disabled >
+                {{t.codTipo}}    {{t.nomTipo}}  
+               </option>
+                      {% for r in t.getRubros %}
+                      <option disabled>
+                       {{r.getCodRubro}}    {{r.nomRubro}} 
+                      </option>
+                         {% for c in r.cuentasPorRubro %}
+
+                          <option value="{{c.idCuenta}}" onclick="putnewcod('{{c.getCodCuenta}}','{{c.getCodNextSon_str}}');">
+                           {{c.getCodCuenta}}    {{c.nomCuenta}}
+                          </option>                                     
+                  {% endfor %}
+                {% endfor %}      
+              {% endfor %}       
+        </select>
+               </p>
+              
+           <!-- <p class="left">
+               <label for="">codigo</label>
+               <input  id="cns" type="text" name="cns" value="" placeholder="">
+           </p> -->
+           <p>
+               <label for="">nombre</label>
+               <input  type="text" name="nombreCuenta" value="" required="">
+           </p>
+           
+					 <div >
+            <input type="submit" class="button" name="insert" value="enviar" onclick="setid()">
+            <!-- <input type="submit" class="button" name="regresar" value="cancelar" onclick="cancel()">
+						<input type="hidden"  name="actual" value="0" id="actual">
+            <input type="hidden" id="Accion" name="Accion" value="0" > -->
+        </form>
+        <div class="alert alert-danger" role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        {% if mensaje %} 
+        <span class="sr-only">mensaje:</span>
+                
+          {{mensaje}}
+        {% endif %} 
+        </div>
