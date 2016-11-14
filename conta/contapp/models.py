@@ -62,6 +62,9 @@ class rubCuenta(models.Model):
     codRubro=models.IntegerField(validators=[MinValueValidator(1),MaxValueValidator(9)])
     nomRubro=models.CharField(max_length=50)
     idTipo=models.ForeignKey(tipCuenta, on_delete=models.CASCADE)
+# # nos dara las cuentas de ma
+#     def getCuentasLibroMayor():
+#         pass
     
     def getCodRubro(self):
         cod=(str(self.idTipo.codTipo))+(str(self.codRubro))
@@ -174,6 +177,10 @@ class cuenta(models.Model):
             return True
         else:
             return False
+
+    def getMoves(self):
+        moves=movimiento.objects.filter(idCuenta=self.idCuenta).order_by('idCuenta')
+        return moves
 
     def __str__(self):
         return (str(self.idCuenta))+"//"+self.getCodCuenta()+" "+self.nomCuenta
