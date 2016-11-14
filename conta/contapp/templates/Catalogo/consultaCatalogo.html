@@ -4,86 +4,105 @@
 <link rel="stylesheet" href="{% static 'bootstrap/css/estilos.css'%}"> {%endblock%}
 
 
-<<!-- link rel="stylesheet" href="/static/css/style.css">
+<!-- link rel="stylesheet" href="/static/css/style.css">
     <h3> catalogo de cuentas </h3>
 
     -->
-    <form class="" action="{% url 'importar-nuevo' %}" method="post">
+<form class="" action="{% url 'importar-nuevo' %}" method="post">
 
-        <h1>hola mundo</h1>
-        <div class="hijo">
-            <label class=""></label> {%block areaTrabajo%} Empresa:{{empresa}}
-            <!-- Empresa:{{cat.empresa}} -->
+    <h1>hola mundo</h1>
+    <div class="hijo">
+        <label class=""></label>
+         {%block areaTrabajo%}
+        <h1 align=center> Catalogo de Cuentas </h1>
+        <h3 align=center>Empresa:{{empresa}}</h3>
+        <!-- Empresa:{{cat.empresa}} -->
 
-              <label for="kwd_search">Search:</label> <input type="text" id="kwd_search" value=""/>
-            <!--TABLA-->
-            <table id="my-table" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                <thead>
+        <label for="kwd_search">BUSCAR:</label> <input type="text" id="kwd_search" value="" />
+        <!--TABLA-->
+        <div id="contenedorForm">
+        </div>
+        <table id="my-table" class="table table-striped table-bordered" cellspacing="0" width="75%">
+            <thead>
+                <tr>
+                    <th>Codigo</th>
+                    <th>Nombre</th>
+                    <th>Dependecia</th>
+                    <th>Grado</th>
+                    <th>Rubro</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <div>
                     <tr>
-                        <th>Codigo</th>
-                        <th>Nombre</th>
-                        <th>Dependecia</th>
-                        <th>Grado</th>
-                        <th>Rubro</th>
-                        <th>Opciones</th>
+                        {% for t in empresa.getTipos %}
+                        <!-- <div class="">-->
+                        <td>{{t.codTipo}}</td>
+                        <td>{{t.nomTipo}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><span class="editar" onclick="transformarEnEditable(this)">Editar</span>&nbsp;&nbsp;<span class="borrar"
+                                onclick="">Borrar</span></td>
+                        <!--</div>-->
                     </tr>
-                </thead>
-                <tbody>
-                    <div>
+                    <tr>
+                        {% for r in t.getRubros %}
+                        <!-- <div class="">-->
+                        <td>{{t.codTipo}} {{r.codRubro}}</td>
+                        <td> {{r.nomRubro}}</td>
+                        <!-- {{r.codRubro}} : {{r.nomRubro}} -->
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><span class="editar" onclick="transformarEnEditable(this)">Editar</span>&nbsp;&nbsp;<span class="borrar"
+                                onclick="">Borrar</span></td>
 
-                        <tr>
-                            {% for t in empresa.getTipos %}
-                            <!-- <div class="">-->
-                            <td>{{t.codTipo}}</td>
-                            <td>{{t.nomTipo}}</td>
-                            <td></td><td></td><td></td>
-                            <!--</div>-->
-                        </tr>
-                        <tr>
-                            {% for r in t.getRubros %}
-                         <!-- <div class="">-->
-                                <td> {{r.codRubro}}</td>
-                                <td> {{r.nomRubro}}</td>
-                                <!-- {{r.codRubro}} : {{r.nomRubro}} -->
-                                <td></td>
-                              <!--</div>-->
-                        </tr>
-                        <tr>
-                            {% for c in r.cuentasPorRubro %}
-                           <!-- <div class="">-->
+                        <!--</div>-->
+                    </tr>-->
+                    <tr>
 
-                                <td></td>
-                                <td> {{c}}</td>
-                                <td></td>
-                                <td> grado:{{c.grado}}</td>
-                             <!--</div>-->
-                        </tr>
-                        {% endfor %} {% endfor %} {% endfor %}
+                        {% for c in r.cuentasPorRubro %}
+                        <!-- <div class="">-->
 
-                        </tr>
-                    </div>
-                </tbody>
+                        <td>{{t.codTipo}}{{r.codRubro}}{{c.codCuenta}}</td>
+                        <td> {{c.nomCuenta}}</td>
+                        <td></td>
+                        <td> grado:{{c.grado}}</td>
+                        <td></td>
+                        <td><span class="editar" onclick="transformarEnEditable(this)">Editar</span>&nbsp;&nbsp;
+                            <span class="borrar" onclick="">Borrar</span></td>
+                        <!--</div>-->
+                    </tr>
+                    {% endfor %} {% endfor %} {% endfor %}
 
-            </table>
+                    </tr>
+                </div>
+            </tbody>
+
+        </table>
 
 
 
 
-    </form>{%endblock%}
+</form>{%endblock%}
 
 
-    <!-- <div class="form-group">
+<!-- <div class="form-group">
                         <div class="col-sm-12 text-center">
                         <a href="" class="btn btn-default">Regresar</a>
                         </div>
                         </div>
                         </form> -->
-    {% block js%}
-    <script src="{% static 'bootstrap/js/jquery.js'%}"></script>
-    <script src="{% static 'bootstrap/js/bootstrap.min.js'%}"></script>
-    <script src="{% static 'bootstrap/js/jquery.dataTables.min.js'%}"></script>
-    <script src="{% static 'bootstrap/js/jquery-1.12.3.js'%}"></script>
-    <script src="{% static 'bootstrap/js/search.js'%}"></script>
-    <script src="//code.jquery.com/jquery-1.12.3.js"></script>
-    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script> {%endblock%}
+{% block js%}
+<script src="{% static 'bootstrap/js/jquery.js'%}"></script>
+<script src="{% static 'bootstrap/js/bootstrap.min.js'%}"></script>
+<script src="{% static 'bootstrap/js/jquery.dataTables.min.js'%}"></script>
+<script src="{% static 'bootstrap/js/jquery-1.12.3.js'%}"></script>
+<script src="{% static 'bootstrap/js/search.js'%}"></script>
+<script src="//code.jquery.com/jquery-1.12.3.js"></script>
+<script src="{% static 'static/bootstrap/js/modificar.js'%}"></script>
+<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
+ {%endblock%}
