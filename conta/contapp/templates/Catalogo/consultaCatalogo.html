@@ -20,8 +20,10 @@
 
         <label for="kwd_search">BUSCAR:</label> <input type="text" id="kwd_search" value="" />
         <!--TABLA-->
-        <div id="contenedorForm">
-        </div>
+       
+       <div id="table" class="table-editable">
+        <span class="table-add glyphicon glyphicon-plus"></span>
+      
         <table id="my-table" class="table table-striped table-bordered" cellspacing="0" width="75%">
             <thead>
                 <tr>
@@ -43,8 +45,7 @@
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td><span class="editar" onclick="transformarEnEditable(this)">Editar</span>&nbsp;&nbsp;<span class="borrar"
-                                onclick="">Borrar</span></td>
+                        <td><span class="table-remove glyphicon glyphicon-remove"></span></span></td>
                         <!--</div>-->
                     </tr>
                     <tr>
@@ -82,7 +83,7 @@
             </tbody>
 
         </table>
-
+</div>
 
 
 
