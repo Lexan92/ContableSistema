@@ -16,7 +16,7 @@ def Catalogo(request):
     except Exception :
         emp=""
     if emp:
-        return render(request,'Catalogo/Catalogo.html')
+        return render(request,"Catalogo/Catalogo.html")
 
 def consultaCatalogo(request):
     try:
