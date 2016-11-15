@@ -76,9 +76,9 @@ def regPartida(request):
                     cuent=cuenta.objects.get(idCuenta=(int(a[i])))
                     movimient.idCuenta=cuent
                     if b[i]:
-                        movimient.debe=int(b[i])
+                        movimient.debe=float(b[i])
                     if c[i]:
-                        movimient.haber=int(c[i])
+                        movimient.haber=float(c[i])
                     movimient.save()
             #finaliza el  registro de movimientos          
             except Exception:

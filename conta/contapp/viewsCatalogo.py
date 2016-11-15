@@ -34,7 +34,9 @@ def createUpdateC(request):
         emp = empresa.objects.get(codEmpresa = int(request.session['codemp']))
     except Exception :
         emp=""
+        # si el metodo no es es post esntonces sele mostrara el fomulario de creacion de cuenta
     if request.method == 'POST':
+        # si el metodo es post entonces ya fueron confirmados los datos de la cuenta crear y 
         if request.session.has_key('codemp'):
             cuent=cuenta()
             rubro=rubCuenta.objects.get(idRubro=int(request.POST.get('idrubro')))
@@ -60,6 +62,8 @@ def createUpdateC(request):
         return render(request, "Home.html", {'mensaje': 'Debe selecionar una empresa para iniciar','empresas':empresa.objects.all(),})    
 
 def confirmarcreate(request):
+    # esta funcion solo recibe los parametros generales de la cuenta crear y envia el detalle de la cuenta crear
+    # y realiza las validaciones necesarias para ingresar la cuenta 
 
     try:
         emp = empresa.objects.get(codEmpresa = int(request.session['codemp']))
