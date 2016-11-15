@@ -1,3 +1,12 @@
+{%extends "Base.html"%} {% load staticfiles%} 
+{%block css %}<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}" />
+<link rel="stylesheet" href="{% static 'bootstrap/css/jquery.dataTables.min.css'%}"/>
+<link rel="stylesheet" href="{% static 'bootstrap/css/estilos.css'%}"/> {%endblock%}
+
+
+
+{% block areaTrabajo%}
+
 <form  id="myformu" name="fvalida"  method="POST" action="{% url 'createUpdateC' %}">{% csrf_token %}
           <!--  <input type="hidden" id="hdnAccion" name="hdnAccion" value="0" />
            <input type="hidden" id="hdnValor" name="hdnValor" value="0" /> -->
@@ -40,5 +49,5 @@
         <input type="submit" value="cancelar" form="fo">
         <form id="fo"action="{% url 'Catalogo' %}">
         </form>
-
+{%endblock%}
         <!-- <input type="button" class="button" name="regresar" value="cancelar" onclick="{% url 'Catalogo' %}"> -->

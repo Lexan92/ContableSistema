@@ -1,19 +1,40 @@
 {%extends "Base.html"%} {% load staticfiles%} {%block css %}
 <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}" />
-<link rel="stylesheet" href="{% static 'bootstrap/css/jquery.dataTables.min.css'%}">
-<link rel="stylesheet" href="{% static 'bootstrap/css/estilos.css'%}"> {%endblock%}
+<link rel="stylesheet" href="{% static 'bootstrap/css/jquery.dataTables.min.css'%}"/>
+<link rel="stylesheet" href="{% static 'bootstrap/css/estilos.css'%}"/> {%endblock%}
 
 
 <!-- link rel="stylesheet" href="/static/css/style.css">
     <h3> catalogo de cuentas </h3>
-
-    -->
 <form class="" action="{% url 'importar-nuevo' %}" method="post">
+    -->
 
-    <h1>hola mundo</h1>
-    <div class="hijo">
-        <label class=""></label>
+
+
+   <!-- <div class="hijo">
+        <label class=""></label>-->
+         {%block barraLateral%}
+                
+               <!-- <li class="sidebar-brand"><a href="#">Opciones:</a></li>
+                <li><a href="#">Opcion 1</a></li>
+                <li><a href="#">Opcion 2</a></li>
+                <li><a href="#">Opcion 3</a></li>
+                <li><a href="#">Opcion 4</a></li>
+                <li><a href="#">Opcion 5</a></li>
+                <li><a href="#">Opcion 6</a> </li>
+                <li><a href="#">Opcion 7</a></li>-->
+                    {%endblock%}
+
+
+
+
+
+
+
+
          {%block areaTrabajo%}
+        
+        
         <h1 align=center> Catalogo de Cuentas </h1>
         <h3 align=center>Empresa:{{empresa}}</h3>
         <!-- Empresa:{{cat.empresa}} -->
