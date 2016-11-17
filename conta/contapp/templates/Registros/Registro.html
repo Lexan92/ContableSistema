@@ -115,6 +115,31 @@
  </div>
  </div>
  </div>
+ <select id="insertcodigo" class="insertcodigo" data-live-search="true" name="insertcodigo" onChange="valida()">
+            {% for t in empresa.getTipos %} 
+            <option disabled >
+               {{t.codTipo}}    {{t.nomTipo}}  
+             </option>
+              {% for r in t.getRubros %}
+              <option disabled>
+                {{r.getCodRubro}}    {{r.nomRubro}} 
+              </option>
+                  {% for c in r.getCuentasMenor %}
+                    {% if c.haveSons %}
+                      <option disabled >
+                      {{c.getCodCuenta}}    {{c.nomCuenta}}
+                      </option>
+                    {% else %}
+                      <option value="{{c.idCuenta}}">
+                      {{c.getCodCuenta}}    {{c.nomCuenta}}
+                      </option>  
+                    {% endif %}                 
+                  {% endfor %}
+                {% endfor %}      
+              {% endfor %}
+            
+                
+        </select>
 {%endblock%}
 {% block js%}
 

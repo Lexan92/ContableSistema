@@ -47,6 +47,9 @@ urlpatterns = [
 
 
 #------------------------------LIBROS--------------------------------------------
+    url(r'^conta/Libros/$', Libros, name="Libros",),
+    url(r'^conta/Libros/Periodo$', periodo, name="periodo",),
+
 
 #-------------------------ESTADOS FIANANCIEROS-----------------------------------
 

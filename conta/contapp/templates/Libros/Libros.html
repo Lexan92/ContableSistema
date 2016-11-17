@@ -1,0 +1,101 @@
+{%extends "Base.html"%}
+{% load staticfiles%}
+{%block css %}
+{%endblock%}
+
+{%block opcionesmenu %}
+                    <li role="presentation" ><a href="{% url 'login' %}  ">Home</a></li>
+                    <li role="presentation" class="active"><a href="#">Libros</a></li>
+                   
+                    <li role="presentation"><a href="#">Cerrar Sesion</a></li>
+                    {%endblock %}
+
+ {%block barraLateral%} 
+             <!--    <li class="sidebar-brand"><a href="#">Opciones: Libros</a></li>
+                <li><a href="{% url 'consultaPartida' %}">Libro Mayor</a></li>
+                <li><a href="">Opcion consultar</a></li>
+                <li><a href="">Opcion </a></li> -->
+                <!-- <li><a href="#">Opcion 4</a></li>
+                <li><a href="#">Opcion 5</a></li>
+                <li><a href="#">Opcion 6</a> </li>
+                <li><a href="#">Opcion 7</a></li> -->
+
+
+                <div class="list-group">
+                    <a href="#" class="list-group-item active">
+                    <span class="glyphicon glyphicon-home"></span>  {{empresa}}
+                    </a> 
+
+                   <div class="list-group">
+                    <!-- <a href="{% url 'periodo' %}" class="list-group-item" onclick="addRow('dataTable');"> -->
+                    <a href="#" class="list-group-item" onclick="libromayor();">
+                    <span class="glyphicon glyphicon-eye-open" ></span> Libro Mayor</a>
+                    <a href="#" class="list-group-item" onclick="libromenor();">
+                    <span class="glyphicon glyphicon-eye-open"></span> Libro Menor</a> 
+{%endblock%}
+
+
+{%block areaTrabajo%}
+    <div>
+      <form method="post" action="{% url 'periodo' %}" id="fo" name="fo">{% csrf_token %}
+    <INPUT type="text" id="libro"  disabled value=" seleciona un libro" />
+    <INPUT type="hidden"  id="codlibro" name="codlibro"value="" />
+    <label>digite un año</label>
+    <INPUT type="number" id="anio"  name="anio" min="1900" max="2100" maxlength="4"  value="" />
+    
+    <label>digite un mes</label>
+    <select id="mes" class=""  name="mes" >
+             <option value=""></option>
+             <option value="1">ENERO</option>
+             <option value="2">FEBRERO</option>
+             <option value="3">MARZO</option>
+             <option value="4">ABRIL</option>
+             <option value="5">MAYO</option>
+             <option value="6">JUNIO</option>
+             <option value="7">JULIO</option>
+             <option value="8">AGOSTO</option>
+             <option value="9">SEPTIEMBRE</option>
+             <option value="10">OCTUBRE</option>
+             <option value="11">NOVIEMBRE</option>
+             <option value="12">DICIENBRE</option>
+    </select>
+    <label>acumulado</label>
+    <input type="checkbox" name="aculamulado" value="ON" onclick = "document.getElementById('mes').disabled = this.checked" >
+    </form>
+    <input type="submit"   name="mysubmit" form="fo"value="Enviar" />
+    </div>
+    {% if mensaje %} 
+    <div class="alert alert-danger" role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">mensaje:</span>    
+          {{mensaje}}       
+        </div>
+    {% endif %} 
+
+
+{%endblock%}
+
+
+{% block js%}
+
+<script src="{% static 'bootstrap/js/miscrip.js'%}"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script>
+
+function libromayor(){
+
+  document.getElementById('libro').value = "Libro Mayor";
+  document.getElementById('codlibro').value = 1;
+}
+function libromenor(){
+
+  document.getElementById('libro').value = "Libro Menor";
+  document.getElementById('codlibro').value = 2;
+}
+
+
+</script>
+     
+     
+
+{%endblock%}

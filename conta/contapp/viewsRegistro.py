@@ -47,10 +47,7 @@ def regPartida(request):
             b=request.POST.getlist('debe')
             # contiene los valores de haber para cada cuenta
             c=request.POST.getlist('haber')
-            # d=[]
-            # d.append(len(a))
-            # d.append(len(b))
-            # d.append(len(c))
+           
             d=len(a)
             formato = "%Y-%m-%d"                  
             ok=True            
@@ -83,37 +80,9 @@ def regPartida(request):
             #finaliza el  registro de movimientos          
             except Exception:
                 ok=False
-            # partid=partida()
-            # if request.POST.get('fechaP'):
-            #     fecha = datetime.strptime(request.POST.get('fechaP'),formato)
-            #     partid.fecha=fecha
-            # partid.numPartida=numPartida
-            # partid.codEmpresa=emp
-            # if request.POST.get('concepto'):
-            #     partid.concepto=request.POST.get('concepto')
-
-            # partid.save()   
-
-            # finaliza el registro de partida
-            # comienza el registro de movimientos
-            # for i in range(d):
-            #     movimient=movimiento()
-            #     movimient.idPartida=partid
-            #     cuent=cuenta.objects.get(idCuenta=(int(a[i])))
-            #     movimient.idCuenta=cuent
-            #     if b[i]:
-            #         movimient.debe=int(b[i])
-            #     if c[i]:
-            #         movimient.haber=int(c[i])
-            #     movimient.save()
-            # #finaliza el  registro de movimientos
-
-            # partidas=partida.objects.filter(codEmpresa=emp.codEmpresa) 
-            # si ok=true entonces el ingreso de partida fue exitoso
+            
             if ok:
                 return render(request,'Registros/Registro.html',{'msg': 'ingreso exitoso','empresa': emp})
-                # return render(request,'Registros/msgPartida.html',{'msg': 'ya casi man','partidas': partidas})
-                # return render(request,'Registros/msgPartida.html',{'msg': 'ya casi man','partidas': partidas})
-                # return render(request,'msgPartida.html',{'msg': 'ya casi man','cod': a,'debe': b,'haber': c,'long': d,'partidas': partidas})
+               
             else:
                 return render(request,'Registros/Registro.html',{'msg': 'Ingreso fallido','empresa': emp})

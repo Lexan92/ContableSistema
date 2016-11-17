@@ -100,6 +100,35 @@ class rubCuenta(models.Model):
                 l=self.listCuentasMenor(c)
                 lst=lst+l
             return lst
+    def listCuentasMenorv2(self,cuentaPadre):
+     #caso base
+        cpc=[]
+        
+     #si la cuenta no tiene hijas se retorna la lista solo con la cuenta enviada       
+        if not cuentaPadre.getSons():
+            cpc.append(cuentaPadre)
+            return cpc
+        else:  
+            for c in cuentaPadre.getSons():
+                l=self.listCuentasMenorv2(c)
+                cpc=cpc+l
+    #si la cuenta tienes hijas se envia una lista con el padre y las hijas y nietos     
+            return cpc
+    #se obtiene una lista de cuentas por rubro
+    def getCuentasMenor(self):
+        lst=[]
+        # lst.append(rubro)
+        # if not rubro.getCuentasMayor():
+        if not self.getCuentasMayor():
+            return lst
+        else:
+            for c in self.getCuentasMayor():
+                l=self.listCuentasMenorv2(c)
+                lst=lst+l
+            return lst
+
+
+
  #retorna el codigo de la siguiente cuenta de mayor
     def getCodNextMayor(self):
         cuentasMayores=cuenta.objects.filter(idRubro=self.idRubro).filter(idCuentaPadre__isnull=True).order_by('codCuenta')
