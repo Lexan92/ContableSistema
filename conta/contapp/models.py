@@ -235,8 +235,8 @@ class partida(models.Model):
 
 class movimiento(models.Model):
     idMovimiento=models.AutoField(primary_key=True)
-    debe=models.FloatField(null=True,blank=True)
-    haber=models.FloatField(null=True,blank=True)
+    debe=models.FloatField(default=0.00,blank=True)
+    haber=models.FloatField(default=0.00,blank=True)
     idPartida=models.ForeignKey(partida, on_delete=models.CASCADE)
     idCuenta=models.ForeignKey(cuenta,on_delete=models.CASCADE,default=1)
     def __str__(self):

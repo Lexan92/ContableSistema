@@ -1,0 +1,85 @@
+{%extends "Base.html"%}
+{% load staticfiles%}
+{%block css %}
+{%endblock%}
+
+{%block opcionesmenu %}
+                    <li role="presentation" ><a href="{% url 'login' %}  ">Home</a></li>
+                    <li role="presentation" class="active"><a href="#">Estados Financieros</a></li>
+                   
+                    <li role="presentation"><a href="#">Cerrar Sesion</a></li>
+                    {%endblock %}
+
+ {%block barraLateral%} 
+                
+
+
+                <div class="list-group">
+                    <a href="#" class="list-group-item active">
+                    <span class="glyphicon glyphicon-home"></span>  {{empresa}}
+                    </a> 
+
+                   <div class="list-group">
+                    <a href="#" class="list-group-item">
+                    <span class="glyphicon glyphicon-eye-open"></span>Consulta de {{estadoF}}
+                    </a>  
+{%endblock%}
+
+
+{%block areaTrabajo%}
+<div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                {%for r in rubEF %}
+                    {%if r.listCuentas%}
+                    <div>
+                       <INPUT type="text" id="libro"  style="width:100%;" disabled value="{{r.rubro}} " />       
+                        
+                        {%for cm in r.listCuentas%}
+                            {%if cm.lstMoves%}
+
+                        <div>
+                        <INPUT type="text" id=""  style="width:53%;" disabled 
+                        value="{{cm.cuenta}}" />
+                        <INPUT type="text" id="debe"   style="width:15%;" disabled 
+                        value="DEBE:{{cm.debe}} " />
+                        <INPUT type="text" id="haber"  style="width:15%;" disabled 
+                        value="HABER:{{cm.haber}}" />
+                        <INPUT type="text" id="saldo" class="saldo" style="width:15%;" disabled 
+                        value="{{cm.saldo}} " />
+                        </div>
+                            {%endif%}
+                        {%endfor%}
+                        <div>
+                        <INPUT type="text" id="libro"  style="width:53%;" disabled 
+                        value="SALDOS" />
+                        <INPUT type="text" id="libro"  style="width:15%;" disabled 
+                        value="DEBE:{{r.debe}} " />
+                        <INPUT type="text" id="libro"  style="width:15%;" disabled 
+                        value="HABER:{{r.haber}}" />
+                        <INPUT type="text" id="libro"  style="width:15%;" disabled 
+                        value="SALDO:{{r.saldo}} " />
+                        </div>
+                    </div>
+                    {%endif%}
+                {%endfor%}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+                       
+
+
+{%endblock%}
+{% block js%}
+
+<script src="{% static 'bootstrap/js/miscrip.js'%}"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+     
+     
+
+{%endblock%}

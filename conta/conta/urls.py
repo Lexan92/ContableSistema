@@ -48,11 +48,10 @@ urlpatterns = [
 
 #------------------------------LIBROS--------------------------------------------
     url(r'^conta/Libros/$', Libros, name="Libros",),
-    url(r'^conta/Libros/Periodo$', periodo, name="periodo",),
-
-
+    url(r'^conta/Libros/Consulta/$', consultaLibro, name="consultaLibro",),
 #-------------------------ESTADOS FIANANCIEROS-----------------------------------
-
+    url(r'^conta/EstadosFinancieros/$', estadosF, name="estadosF",),
+     url(r'^conta/EstadosFinancieros/Consulta$', consultaEstadoF, name="consultaEstadoF",),
 
     # url(r'^conta/Catalogo/', queryCatalogo, name="queryCatalogo",),
     

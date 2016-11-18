@@ -22,7 +22,7 @@ def Libros(request):
     else:
         return render(request, "Home.html", {'mensaje': 'Debe selecionar una empresa para iniciar','empresas':empresa.objects.all(),})    
 
-def periodo(request):
+def consultaLibro(request):
     try:
         emp = empresa.objects.get(codEmpresa = int(request.session['codemp']))
     except Exception :
@@ -48,7 +48,7 @@ def periodo(request):
                     mensaj=""
                     return render(request,'Libros/showLibro.html',{'mensaje': mensaj,'empresa': emp,'libro':libro})
             else:
-            	mensaj="selecione un tipo de libro o solo el tipo 1"
+            	mensaj="selecione un tipo de libro "
             	return render(request,'Libros/Libros.html',{'mensaje': mensaj,'empresa': emp})       
         elif request.session.has_key('codemp') == False: #Usuario no ha iniciado sesión
             return render(request, "Home.html", {'mensaje': 'Debe selecionar una empresar para iniciar','empresas':empresa.objects.all(),})

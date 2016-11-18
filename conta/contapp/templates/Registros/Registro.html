@@ -63,7 +63,7 @@
         <!-- <input type="submit"   name="mysubmit" value="Enviar" /> -->
         
         </form>
-        <select id="insertcodigo" class="insertcodigo" data-live-search="true" name="insertcodigo" onChange="valida()">
+        <select id="insertcodigo" class="insertcodigo" data-live-search="true" required name="insertcodigo" onChange="valida()">
             {% for t in empresa.getTipos %} 
             <option disabled >
                {{t.codTipo}}    {{t.nomTipo}}  
@@ -115,7 +115,7 @@
  </div>
  </div>
  </div>
- <select id="insertcodigo" class="insertcodigo" data-live-search="true" name="insertcodigo" onChange="valida()">
+ <!-- <select id="insertcodigo" class="insertcodigo" data-live-search="true" name="insertcodigo" onChange="valida()">
             {% for t in empresa.getTipos %} 
             <option disabled >
                {{t.codTipo}}    {{t.nomTipo}}  
@@ -139,7 +139,7 @@
               {% endfor %}
             
                 
-        </select>
+        </select> -->
 {%endblock%}
 {% block js%}
 

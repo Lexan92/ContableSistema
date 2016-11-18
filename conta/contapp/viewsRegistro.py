@@ -47,10 +47,35 @@ def regPartida(request):
             b=request.POST.getlist('debe')
             # contiene los valores de haber para cada cuenta
             c=request.POST.getlist('haber')
-           
+
             d=len(a)
             formato = "%Y-%m-%d"                  
-            ok=True            
+            ok=True
+            # validacion de existencia de cuentas en partida
+            if not a:
+                return render(request,'Registros/Registro.html',{'msg': 'ingrese cuentas,ingreso fallido','empresa': emp})
+            else:
+                for i in range(d):
+                    if not b[i] and not c[i]:
+                        return render(request,'Registros/Registro.html',{'msg': 'ingrese monto en deber o haber en cada movimiento,ingreso fallido','empresa': emp})
+            
+            # validacion de suma de debe y haber 
+            sum1=0.00
+            sum2=0.00
+            for i in range(d):
+                if not b[i]:
+                    sum1=sum1+ 0.00
+                else:
+                    sum1=sum1+ float(b[i])
+                if not  c[i]:
+                    sum2=sum2+ 0.00
+                else:
+                    sum2=sum2+ float(c[i])                        
+            if not (sum1==sum2):
+                return render(request,'Registros/Registro.html',{'msg': 'suma en debe diferente de suma en haber,ingreso fallido','empresa': emp})
+                # return render(request,'Registros/Registro.html',{'msg': 'ingrese montos en debe o haber,ingreso fallido','empresa': emp})
+
+                       
 
             # fecha=request.POST.get('fechaP')
             numPartida=request.POST.get('numeroP')
@@ -72,10 +97,14 @@ def regPartida(request):
                     movimient.idPartida=partid
                     cuent=cuenta.objects.get(idCuenta=(int(a[i])))
                     movimient.idCuenta=cuent
-                    if b[i]:
+                    if b[i] and cuent:
                         movimient.debe=float(b[i])
-                    if c[i]:
+                    elif cuent:
+                        movimient.debe=0.00
+                    if c[i] and cuent:
                         movimient.haber=float(c[i])
+                    elif cuent:
+                        movimient.haber=0.00
                     movimient.save()
             #finaliza el  registro de movimientos          
             except Exception:
