@@ -58,7 +58,8 @@ function putnewcod(codPadre,codNextSon){
                var cell4 = row.insertCell(3);
                var element4 = document.createElement("input");
                element4.type = "number";
-               element4.min = "0";
+               element4.min = "0.00";
+               element4.step="any";
                element4.name = "debe";
                element4.value = document.getElementById("insertdebe").value;
                document.getElementById("insertdebe").value="";
@@ -67,7 +68,8 @@ function putnewcod(codPadre,codNextSon){
                var cell5 = row.insertCell(4);
                var element5 = document.createElement("input");
                element5.type = "number";
-               element5.min = "0";
+               element5.min = "0.00";
+               element5.step="any";
                element5.name = "haber";
                element5.value = document.getElementById("inserthaber").value;
                document.getElementById("inserthaber").value="";

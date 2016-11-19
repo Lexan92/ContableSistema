@@ -19,7 +19,7 @@ class cuentaLibro:
         self.cuenta=cuenta()
         self.lstMoves=[]
         self.debe=""
-        self.heber=""
+        self.haber=""
         self.saldo=""
 
 
@@ -27,6 +27,9 @@ class rubroLibro():
     def __init__(self):
         self.rubro=rubCuenta()
         self.listCuentas=[]
+        self.debe=""
+        self.haber=""
+        self.saldo=""
         
 
 class libroMayor:
@@ -36,6 +39,28 @@ class libroMayor:
         self.anio=anio
         self.mes=mes
         self.tipo=tipo
+# obtiene los rubros de cuentas de balance con cuentas y saldo asi como el saldo por rubro
+    def getRubrosBlance(self):
+        libro=[]
+        libro=self.getLibro()
+        rubrosBalance=[]
+        for r in libro:
+            t=r.rubro.idTipo.codTipo
+            if (t==1) or (t==2) or (t==3):
+                rub=self.getSaldosRubro(r)
+                rubrosBalance.append(rub)
+        return rubrosBalance
+
+    def getRubrosER(self):
+        libro=[]
+        libro=self.getLibro()
+        rubrosER=[]
+        for r in libro:
+            t=r.rubro.idTipo.codTipo
+            if (t==4) or (t==5):
+                rub=self.getSaldosRubro(r)
+                rubrosER.append(rub)
+        return rubrosER
 
     def getLibro(self):
         libro=[]
@@ -46,7 +71,7 @@ class libroMayor:
                 rubLibro=self.getRubroLibro(r)
                 libro.append(rubLibro)
         return libro
-
+# obtiene los rubros para el libro junto con cada cuenta y sus movmientos y saldos
     def getRubroLibro(self,rub):
         rubLibro=rubroLibro()
         rubLibro.rubro=rub
@@ -242,27 +267,155 @@ class libroMayor:
         cuentLibro.haber=saldos[1]
         cuentLibro.saldo=saldo[0]
 
-        if not cuentLibro.debe:
-            cuentLibro.debe=0.00
-        elif not cuentLibro.haber:
-            cuentLibro.haber=0.00
-        elif not cuentLibro.saldo:
-            if  (cuentLibro.debe==0.00) and (cuentLibro.haber==0.00):
-                cuentLibro.saldo=0.00
-                return cuentLibro
-            elif (tipo==1) or (tipo==4) or (tipo==6) :
-                if cuentLibro.debe==0.00:
-                    cuentLibro.saldo=cuentLibro.debe-cuentLibro.haber    
-            elif (tipo==2) or (tipo==3) or (tipo==5):
-                if cuentLibro.haber==0.00:
-                    cuentLibro.saldo=cuentLibro.haber-cuentLibro.debe
+        # if not cuentLibro.debe:
+        #     cuentLibro.debe=0.00
+        # elif not cuentLibro.haber:
+        #     cuentLibro.haber=0.00
+        # elif not cuentLibro.saldo:
+        #     if  (cuentLibro.debe==0.00) and (cuentLibro.haber==0.00):
+        #         cuentLibro.saldo=0.00
+        #         return cuentLibro
+        #     elif (tipo==1) or (tipo==4) or (tipo==6) :
+        #         if cuentLibro.debe==0.00:
+        #             cuentLibro.saldo=cuentLibro.debe-cuentLibro.haber    
+        #     elif (tipo==2) or (tipo==3) or (tipo==5):
+        #         if cuentLibro.haber==0.00:
+        #             cuentLibro.saldo=cuentLibro.haber-cuentLibro.debe
         # else:
         #     cuentLibro.saldo=saldo[0]
         #     # cuentLibro.debe=saldos[0]
             # cuentLibro.haber=saldos[1]        
         return cuentLibro
+    def getSaldosRubro(self,rub):
+        tipo=rub.rubro.idTipo.codTipo
+        idRubro=rub.rubro.idRubro
+        saldo=""
+        saldos=[]
+
+        if self.mes:
+            with connection.cursor() as c:
+                c.execute( """ WITH RECURSIVE metas("idCuenta", "codCuenta", "nomCuenta",grado, "idCuentaPadre_id", "idRubro_id") 
+                AS (select *from (SELECT "idCuenta", "codCuenta", "nomCuenta", grado, "idCuentaPadre_id","idRubro_id"
+                FROM contapp_cuenta WHERE  "idRubro_id"=%s order by "idCuenta") as rc
+                UNION
+                SELECT ms."idCuenta", ms."codCuenta",ms."nomCuenta",ms.grado, ms."idCuentaPadre_id", ms."idRubro_id"
+                FROM contapp_cuenta as ms, metas WHERE metas."idCuenta" =ms."idCuentaPadre_id"
+                )
+                select sum(sl."debe") as debe,sum(sl."haber") as haber from (
+                    select * from (SELECT "idMovimiento",fecha,"debe","haber"
+                    FROM contapp_partida a
+                    inner JOIN contapp_movimiento b ON (a."idPartida"=b."idPartida_id")
+                    inner JOIN metas c ON (b."idCuenta_id"=c."idCuenta")
+                    where  TO_CHAR(fecha,'YYYY')=%s and TO_CHAR(fecha,'MM')=%s )
+                    s order by s.fecha) 
+                sl  """, [idRubro,self.anio,self.mes] )
+                saldos=c.fetchone()
+                # evaluo si el saldo es deudor(1,4,6) o acreedor(2,3,5)
+            if (tipo==1) or (tipo==4) or (tipo==6) :
+                with connection.cursor() as c:
+                    c.execute( """ WITH RECURSIVE metas("idCuenta", "codCuenta", "nomCuenta",grado, "idCuentaPadre_id", "idRubro_id") 
+                AS (select *from (SELECT "idCuenta", "codCuenta", "nomCuenta", grado, "idCuentaPadre_id","idRubro_id"
+                FROM contapp_cuenta WHERE  "idRubro_id"=%s order by "idCuenta") as rc
+                UNION
+                SELECT ms."idCuenta", ms."codCuenta",ms."nomCuenta",ms.grado, ms."idCuentaPadre_id", ms."idRubro_id"
+                FROM contapp_cuenta as ms, metas WHERE metas."idCuenta" =ms."idCuentaPadre_id"
+                )
+                select (sum(sl."debe") - sum(sl."haber")) saldo from (
+                    select * from (SELECT "idMovimiento",fecha,"debe","haber"
+                    FROM contapp_partida a
+                    inner JOIN contapp_movimiento b ON (a."idPartida"=b."idPartida_id")
+                    inner JOIN metas c ON (b."idCuenta_id"=c."idCuenta")
+                    where  TO_CHAR(fecha,'YYYY')=%s and TO_CHAR(fecha,'MM')=%s )
+                    s order by s.fecha) 
+                sl  """, [idRubro,self.anio,self.mes] )
+                # saldo deudor 
+                    saldo=c.fetchone()
+
+            elif (tipo==2) or (tipo==3) or (tipo==5):
+                with connection.cursor() as c:
+                    c.execute( """ WITH RECURSIVE metas("idCuenta", "codCuenta", "nomCuenta",grado, "idCuentaPadre_id", "idRubro_id") 
+                AS (select *from (SELECT "idCuenta", "codCuenta", "nomCuenta", grado, "idCuentaPadre_id","idRubro_id"
+                FROM contapp_cuenta WHERE  "idRubro_id"=%s order by "idCuenta") as rc
+                UNION
+                SELECT ms."idCuenta", ms."codCuenta",ms."nomCuenta",ms.grado, ms."idCuentaPadre_id", ms."idRubro_id"
+                FROM contapp_cuenta as ms, metas WHERE metas."idCuenta" =ms."idCuentaPadre_id"
+                )
+                select (sum(sl."haber") - sum(sl."debe")) saldo from (
+                    select * from (SELECT "idMovimiento",fecha,"debe","haber"
+                    FROM contapp_partida a
+                    inner JOIN contapp_movimiento b ON (a."idPartida"=b."idPartida_id")
+                    inner JOIN metas c ON (b."idCuenta_id"=c."idCuenta")
+                    where  TO_CHAR(fecha,'YYYY')=%s  and TO_CHAR(fecha,'MM')=%s )
+                    s order by s.fecha) 
+                sl  """, [idRubro,self.anio,self.mes] )
+                # saldo acreedor
+                    saldo=c.fetchone()
+
+        # -----------------------------------------------------------------------------------------------------
+        #saldos por año o acumulados 
+        else:
+            with connection.cursor() as c:
+                c.execute( """ WITH RECURSIVE metas("idCuenta", "codCuenta", "nomCuenta",grado, "idCuentaPadre_id", "idRubro_id") 
+                AS (select *from (SELECT "idCuenta", "codCuenta", "nomCuenta", grado, "idCuentaPadre_id","idRubro_id"
+                FROM contapp_cuenta WHERE  "idRubro_id"=%s order by "idCuenta") as rc
+                UNION
+                SELECT ms."idCuenta", ms."codCuenta",ms."nomCuenta",ms.grado, ms."idCuentaPadre_id", ms."idRubro_id"
+                FROM contapp_cuenta as ms, metas WHERE metas."idCuenta" =ms."idCuentaPadre_id"
+                )
+                select sum(sl."debe") as debe,sum(sl."haber") as haber from (
+                    select * from (SELECT "idMovimiento",fecha,"debe","haber"
+                    FROM contapp_partida a
+                    inner JOIN contapp_movimiento b ON (a."idPartida"=b."idPartida_id")
+                    inner JOIN metas c ON (b."idCuenta_id"=c."idCuenta")
+                    where  TO_CHAR(fecha,'YYYY')=%s )
+                    s order by s.fecha) 
+                sl  """, [idRubro,self.anio] )
+                saldos=c.fetchone()
+                # evaluo si el saldo es deudor(1,4,6) o acreedor(2,3,5)
+            if (tipo==1) or (tipo==4) or (tipo==6) :
+                with connection.cursor() as c:
+                    c.execute( """ WITH RECURSIVE metas("idCuenta", "codCuenta", "nomCuenta",grado, "idCuentaPadre_id", "idRubro_id") 
+                    AS (select *from (SELECT "idCuenta", "codCuenta", "nomCuenta", grado, "idCuentaPadre_id","idRubro_id"
+                    FROM contapp_cuenta WHERE  "idRubro_id"=%s order by "idCuenta") as rc
+                    UNION
+                    SELECT ms."idCuenta", ms."codCuenta",ms."nomCuenta",ms.grado, ms."idCuentaPadre_id", ms."idRubro_id"
+                    FROM contapp_cuenta as ms, metas WHERE metas."idCuenta" =ms."idCuentaPadre_id"
+                     )
+                    select (sum(sl."debe") - sum(sl."haber")) saldo from (
+                    select * from (SELECT "idMovimiento",fecha,"debe","haber"
+                    FROM contapp_partida a
+                    inner JOIN contapp_movimiento b ON (a."idPartida"=b."idPartida_id")
+                    inner JOIN metas c ON (b."idCuenta_id"=c."idCuenta")
+                    where  TO_CHAR(fecha,'YYYY')=%s )
+                    s order by s.fecha) 
+                    sl  """, [idRubro,self.anio] )
+                # saldo deudor 
+                    saldo=c.fetchone()
+
+            elif (tipo==2) or (tipo==3) or (tipo==5):
+                with connection.cursor() as c:
+                    c.execute( """ WITH RECURSIVE metas("idCuenta", "codCuenta", "nomCuenta",grado, "idCuentaPadre_id", "idRubro_id") 
+                    AS (select *from (SELECT "idCuenta", "codCuenta", "nomCuenta", grado, "idCuentaPadre_id","idRubro_id"
+                    FROM contapp_cuenta WHERE  "idRubro_id"=%s order by "idCuenta") as rc
+                    UNION
+                    SELECT ms."idCuenta", ms."codCuenta",ms."nomCuenta",ms.grado, ms."idCuentaPadre_id", ms."idRubro_id"
+                    FROM contapp_cuenta as ms, metas WHERE metas."idCuenta" =ms."idCuentaPadre_id"
+                    )
+                    select (sum(sl."haber") - sum(sl."debe")) saldo from (
+                    select * from (SELECT "idMovimiento",fecha,"debe","haber"
+                    FROM contapp_partida a
+                    inner JOIN contapp_movimiento b ON (a."idPartida"=b."idPartida_id")
+                    inner JOIN metas c ON (b."idCuenta_id"=c."idCuenta")
+                    where  TO_CHAR(fecha,'YYYY')=%s )
+                    s order by s.fecha) 
+                    sl  """, [idRubro,self.anio] )
+                # saldo acreedor
+                    saldo=c.fetchone()
+        rub.debe=saldos[0]
+        rub.haber=saldos[1]
+        rub.saldo=saldo[0]      
+        return rub
         
-        # cursor = connection.cursor()
 
 
 

@@ -27,24 +27,32 @@
                     </a> 
 
                    <div class="list-group">
-                    <!-- <a href="{% url 'consultaLibro' %}" class="list-group-item" onclick="addRow('dataTable');"> -->
-                    <a href="#" class="list-group-item" onclick="libromayor();">
-                    <span class="glyphicon glyphicon-eye-open" ></span> Libro Mayor</a>
-                    <a href="#" class="list-group-item" onclick="libromenor();">
-                    <span class="glyphicon glyphicon-eye-open"></span> Libro Menor</a> 
+                    
+                    <a href="#" class="list-group-item" >
+                    <span class="glyphicon glyphicon-eye-open" ></span> Balance General</a>
+                    <a href="#" class="list-group-item" onclick="Balancegeneral_M();">
+                    <span class="" ></span> Balance General MAYOR</a>
+                    <a href="#" class="list-group-item" onclick="Balancegeneral_m();">
+                    <span class="" ></span> Balance General MENOR</a>
+                  <!-- ----------------------------------------------------------------------- -->
+                    <a href="#" class="list-group-item" >
+                    <span class="glyphicon glyphicon-eye-open"></span> Estado de Resultado</a>
+                    <a href="#" class="list-group-item" onclick="estadoresultado_M();">
+                    <span class=""></span> Estado de Resultado Cuentas Mayor</a>
+                    <a href="#" class="list-group-item" onclick="estadoresultado_m();">
+                    <span class=""></span> Estado de Resultado Cuentas menor</a> 
 {%endblock%}
 
 
-{%block areaTrabajo%}
-        <div id="page-content-wrapper">
+{%block areaTrabajo%}<div id="page-content-wrapper">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
 
                         
-      <form method="post" action="{% url 'consultaLibro' %}" id="fo" name="fo">{% csrf_token %}
-    <INPUT type="text" id="libro"  disabled value=" seleciona un libro" />
-    <INPUT type="hidden"  id="codlibro" name="codlibro"value="" />
+      <form method="post" action="{% url 'consultaEstadoF' %}" id="fo" name="fo">{% csrf_token %}
+    <INPUT type="text" id="estadoF"  disabled value=" seleciona un libro" />
+    <INPUT type="hidden"  id="codTipo" name="codTipo"value="" />
     <label>digite un año</label>
     <INPUT type="number" id="anio"  name="anio" min="1900" max="2100" maxlength="4"  value="" />
     
@@ -65,7 +73,9 @@
              <option value="12">DICIENBRE</option>
     </select>
     <label>acumulado</label>
-    <input type="checkbox" name="aculamulado" value="ON" onclick = "document.getElementById('mes').disabled = this.checked" >
+    <!-- <input type="checkbox" name="acumulado" value="ON" onclick = "acumulado();" > -->
+    <input type="checkbox" name="aculamulado" value="ON" onclick = "document.getElementById('mes').disabled = this.checked " >
+    <INPUT type="hidden"  id="tipoEF" name="tipoEF"value="" />
     </form>
     <input type="submit"   name="mysubmit" form="fo"value="Enviar" />
     
@@ -85,30 +95,43 @@
         </div>
 
 
-
-
-
-    
-
 {%endblock%}
 
 
 {% block js%}
 
 <script src="{% static 'bootstrap/js/miscrip.js'%}"></script>
-<script src="{% static 'bootstrap/js/jquery.formatCurrency-1.4.0.js'%}"></script>
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <script>
 
-function libromayor(){
 
-  document.getElementById('libro').value = "Libro Mayor";
-  document.getElementById('codlibro').value = 1;
+// para balace se asigna el codigo 1 y el 2 para el estado de resultado
+function Balancegeneral_M(){
+  document.getElementById('estadoF').value = "Balance General(M)";
+// // balance general con cuentas de mayor
+  document.getElementById('codTipo').value = 1;
+  document.getElementById('tipoEF').value = 1;
 }
-function libromenor(){
+function Balancegeneral_m(){
+  document.getElementById('estadoF').value = "Balance General(m)";
+// balance general con cuentas de menor
+  document.getElementById('codTipo').value = 2;
+  document.getElementById('tipoEF').value = 1;
+}
 
-  document.getElementById('libro').value = "Libro Menor";
-  document.getElementById('codlibro').value = 2;
+function estadoresultado_M(){
+  document.getElementById('estadoF').value = "Estado de Resultado(M)";
+  // estado de resultado con cuentas de menor
+  document.getElementById('codTipo').value = 1;
+  document.getElementById('tipoEF').value = 2;
+
+}
+function estadoresultado_m(){
+  document.getElementById('estadoF').value = "Estado de Resultado(m)";
+  // estado de resultado con cuentas de Mayor
+  document.getElementById('codTipo').value = 2;
+  document.getElementById('tipoEF').value = 2;
+
 }
 
 
