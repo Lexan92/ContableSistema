@@ -27,9 +27,26 @@ class rubroLibro():
     def __init__(self):
         self.rubro=rubCuenta()
         self.listCuentas=[]
-        self.debe=""
-        self.haber=""
-        self.saldo=""
+        self.debe=0.0
+        self.haber=0.0
+        self.saldo=0.0
+
+class tipoLibro():
+    def __init__(self):
+        self.tipo=""
+        self.lstRubros=[]
+        self.debe=0.0
+        self.haber=0.0
+        self.saldo=0.0
+
+class estadoFinanciero():
+    def __init__(self):
+        self.lstTipos=[]
+        # PmasC contendra la suma de pasivo + capital
+        self.PmasC=0.0
+        # ImenosE contendra la resta de los ingresos menos egresos
+        self.ImenosE=0.00
+   
         
 
 class libroMayor:
@@ -40,27 +57,105 @@ class libroMayor:
         self.mes=mes
         self.tipo=tipo
 # obtiene los rubros de cuentas de balance con cuentas y saldo asi como el saldo por rubro
-    def getRubrosBlance(self):
+    def getBlanceGeneral(self):        
         libro=[]
         libro=self.getLibro()
-        rubrosBalance=[]
+        # rubrosBalance=[]
+       
+        # for r in libro:
+        #     t=r.rubro.idTipo.codTipo
+        #     if (t==1) or (t==2) or (t==3):
+        #         rub=self.getSaldosRubro(r)
+        #         rubrosBalance.append(rub)
+        tiposBalance=[]
+        activo=tipoLibro()
         for r in libro:
             t=r.rubro.idTipo.codTipo
-            if (t==1) or (t==2) or (t==3):
+            if t==1:
                 rub=self.getSaldosRubro(r)
-                rubrosBalance.append(rub)
-        return rubrosBalance
+                activo.debe=activo.debe+rub.debe
+                activo.haber=activo.haber+rub.haber
+                activo.saldo=activo.saldo+rub.saldo
+                activo.lstRubros.append(rub)
+                if not activo.tipo:
+                    activo.tipo=rub.rubro.idTipo
 
-    def getRubrosER(self):
-        libro=[]
-        libro=self.getLibro()
-        rubrosER=[]
+        pasivo=tipoLibro()
         for r in libro:
             t=r.rubro.idTipo.codTipo
-            if (t==4) or (t==5):
+            if t==2:
                 rub=self.getSaldosRubro(r)
-                rubrosER.append(rub)
-        return rubrosER
+                pasivo.debe=pasivo.debe+rub.debe
+                pasivo.haber=pasivo.haber+rub.haber
+                pasivo.saldo=pasivo.saldo+rub.saldo
+                pasivo.lstRubros.append(rub)
+                if not pasivo.tipo:
+                    pasivo.tipo=rub.rubro.idTipo
+
+        capital=tipoLibro()
+        for r in libro:
+            t=r.rubro.idTipo.codTipo
+            if t==3:
+                rub=self.getSaldosRubro(r)
+                capital.debe=capital.debe+rub.debe
+                capital.haber=capital.haber+rub.haber
+                capital.saldo=capital.saldo+rub.saldo
+                capital.lstRubros.append(rub)
+                if not capital.tipo:
+                    capital.tipo=rub.rubro.idTipo
+
+        tiposBalance.append(activo)
+        tiposBalance.append(pasivo)
+        tiposBalance.append(capital)
+
+        estadoF=estadoFinanciero()
+        estadoF.PmasC=pasivo.saldo+capital.saldo
+        # estadoF.ImenosE
+        estadoF.lstTipos=tiposBalance
+        return estadoF
+
+    def getEstadoResultado(self):
+        libro=[]
+        libro=self.getLibro()
+        # rubrosER=[]
+        # for r in libro:
+        #     t=r.rubro.idTipo.codTipo
+        #     if (t==4) or (t==5):
+        #         rub=self.getSaldosRubro(r)
+        #         rubrosER.append(rub)
+        tiposER=[]
+        egresos=tipoLibro()
+        for r in libro:
+            t=r.rubro.idTipo.codTipo
+            if t==4:
+                rub=self.getSaldosRubro(r)
+                egresos.debe=egresos.debe+rub.debe
+                egresos.haber=egresos.haber+rub.haber
+                egresos.saldo=egresos.saldo+rub.saldo
+                egresos.lstRubros.append(rub)
+                if not egresos.tipo:
+                    egresos.tipo=rub.rubro.idTipo
+
+        ingresos=tipoLibro()
+        for r in libro:
+            t=r.rubro.idTipo.codTipo
+            if t==2:
+                rub=self.getSaldosRubro(r)
+                ingresos.debe=ingresos.debe+rub.debe
+                ingresos.haber=ingresos.haber+rub.haber
+                ingresos.saldo=ingresos.saldo+rub.saldo
+                ingresos.lstRubros.append(rub)
+                if not ingresos.tipo:
+                    ingresos.tipo=rub.rubro.idTipo
+        # return rubrosER
+        tiposER.append(egresos)
+        tiposER.append(ingresos)
+
+        estadoF=estadoFinanciero()
+        # estadoF.PmasC=pasivo.saldo+capital.saldo
+        estadoF.ImenosE=ingresos.saldo-egresos.saldo
+        estadoF.lstTipos=tiposBalance
+        return estadoF
 
     def getLibro(self):
         libro=[]

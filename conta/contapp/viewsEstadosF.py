@@ -35,30 +35,46 @@ def consultaEstadoF(request):
                 mes=request.POST.get('mes')
             else:
                 mes=""
-            anio=request.POST.get('anio')
+
+            if not request.POST.get('anio'):
+                mensaj="Digite un año"
+                return render(request,'EstadosF/EstadoF.html',{'mensaje': mensaj,'empresa': emp}) 
+            else:
+                anio=request.POST.get('anio')
+
+            
             if request.POST.get('codTipo'):
                 # if request.POST.get('codTipo')=="1":
                 if request.POST.get('tipoEF')=="1":
                     tipo=request.POST.get('codTipo')                 
                     libro=libroMayor(emp,anio,mes,tipo)
                     estado="Balance General"
-                    rubros=libro.getRubrosBlance()
+                    # se obtiene el balance general
+                    estadoFinanciero=libro.getBlanceGeneral()                    
+                    # tipos=libro.getTiposBlance()
+                    # rubros=libro.getRubrosBlance()
                     mensaj=""
                     return render(request,'EstadosF/showEstadoF.html',{'mensaje': mensaj,
                     	'estadoF': estado,
-                    	'empresa': emp,
-                    	'rubEF': rubros,
+                        'empresa': emp,
+                    	'Estado': estadoFinanciero,                        
+                        # 'rubEF': rubros,
+                    	# 'tipos': tipos,
                     	'libro':libro})
                 elif request.POST.get('tipoEF')=="2":
                     tipo=request.POST.get('codTipo')
                     libro=libroMayor(emp,anio,mes,tipo)
                     estado="Estado de Resultado"
-                    rubros=libro.getRubrosER()
+                    # se obtiene el estado de resultado
+                    estadoFinanciero=libro.getEstadoResultado()
+                    # rubros=libro.getRubrosER()
+                    # tipos=libro.getTiposER()
                     mensaj=""
                     return render(request,'EstadosF/showEstadoF.html',{'mensaje': mensaj,
                     	'estadoF': estado,
                     	'empresa': emp,
-                    	'rubEF': rubros,
+                        # 'rubEF': rubros,
+                    	'tipos': tipos,
                     	'libro':libro})
             else:
             	mensaj="selecione un tipo de Estado Financiero"

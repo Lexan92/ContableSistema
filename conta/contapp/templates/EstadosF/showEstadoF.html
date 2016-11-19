@@ -31,10 +31,12 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                {%for r in rubEF %}
+            {%for t in Estado.lstTipos %}
+            <INPUT type="text" id="libro"  style="width:100%;" disabled value="{{t.tipo}} " />       
+                {%for r in t.lstRubros %}
                     {%if r.listCuentas%}
                     <div>
-                       <INPUT type="text" id="libro"  style="width:100%;" disabled value="{{r.rubro}} " />       
+                       <INPUT type="text" id="libro"  style="width:50%;" disabled value="{{r.rubro}} " />       
                         
                         {%for cm in r.listCuentas%}
                             {%if cm.lstMoves%}
@@ -64,6 +66,29 @@
                     </div>
                     {%endif%}
                 {%endfor%}
+                    <div>
+                        <INPUT type="text" id="libro"  style="width:53%;" disabled 
+                        value="TOTAL {{t.tipo.nomTipo}}" />
+                        <INPUT type="text" id="libro"  style="width:15%;" disabled 
+                        value="DEBE:{{t.debe}} " />
+                        <INPUT type="text" id="libro"  style="width:15%;" disabled 
+                        value="HABER:{{t.haber}}" />
+                        <INPUT type="text" id="libro"  style="width:15%;" disabled 
+                        value="SALDO:{{t.saldo}} " />
+                    </div>
+            {%endfor%}
+            {% ifequal estadoF "Balance General" %}
+                        <INPUT type="text" id="libro"  style="width:84%;" disabled 
+                        value="TOTAL PASIVO + CAPITAL" />                
+                        <INPUT type="text" id="libro"  style="width:15%;" disabled 
+                        value="{{Estado.PmasC}} " />
+            {% endifequal %}
+            {% ifequal estadoF "Estado de Resultado" %}
+                        <INPUT type="text" id="libro"  style="width:84%;" disabled 
+                        value="TOTAL INGRESOS - EGRESOS" />                
+                        <INPUT type="text" id="libro"  style="width:15%;" disabled 
+                        value="{{Estado.ImenosE}} " />
+            {% endifequal %}
                     </div>
                 </div>
             </div>
