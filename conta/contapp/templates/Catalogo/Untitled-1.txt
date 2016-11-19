@@ -1,0 +1,79 @@
+ {%block areaTrabajo%}
+        
+        
+        <h1 align=center> Catalogo de Cuentas </h1>
+        <h3 align=center>Empresa:{{empresa}}</h3>
+        <!-- Empresa:{{cat.empresa}} -->
+
+        <label for="kwd_search">BUSCAR:</label> <input type="text" id="kwd_search" value="" />
+        <!--TABLA-->
+       
+       <div id="table" class="table-editable">
+        
+      
+        <table id="my-table" class="table table-striped table-bordered" cellspacing="0" width="75%">
+            <thead>
+                <tr>
+                    <th>Codigo</th>
+                    <th>Nombre</th>
+                    <th>Dependecia</th>
+                    <th>Grado</th>
+                    <th>Rubro</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <div>
+                    <tr>
+                        {% for t in empresa.getTipos %}
+                        <!-- <div class="">-->
+                        <td></td>
+                        <td>{{t.nomTipo}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><span class="editar" onclick="transformarEnEditable(this)">Editar</span>&nbsp;&nbsp;<span class="borrar"
+                                onclick="">Borrar</span></td>
+                        <!--</div>-->
+                    </tr>
+                    <tr>
+                        {% for r in t.getRubros %}
+                        <!-- <div class="">-->
+                        <td>{{t.codTipo}} {{r.codRubro}}</td>
+                        <td> {{r.nomRubro}}</td>
+                        <!-- {{r.codRubro}} : {{r.nomRubro}} -->
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><span class="editar" onclick="transformarEnEditable(this)">Editar</span>&nbsp;&nbsp;<span class="borrar"
+                                onclick="">Borrar</span></td>
+
+                        <!--</div>-->
+                    </tr>-->
+                    <tr>
+                          {% for c in r.cuentasPorRubro %}
+                           
+                        
+                        <!-- <div class="">-->
+
+                        <td>{{d.codCuenta}}</td>
+                        <td> {{c.nomCuenta}}</td>
+                        <td></td>
+                        <td> grado:{{c.grado}}</td>
+                        <td></td>
+                        <td><span class="editar" onclick="transformarEnEditable(this)">Editar</span>&nbsp;&nbsp;
+                            <span class="borrar" onclick="">Borrar</span></td>
+                        <!--</div>-->
+                    </tr>
+                    {% endfor %} {% endfor %} {% endfor %}
+
+                    </tr>
+                </div>
+            </tbody>
+
+        </table>
+</div>
+
+
+
+</form>{%endblock%}

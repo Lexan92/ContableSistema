@@ -268,23 +268,6 @@ class libroMayor:
 
 
 
-        
-
-
-
-
-
-
-
-
-
-
-
-
-    
-        
-
-
 class CatalogoCuentas:
 
     def __init__(self, empresa):

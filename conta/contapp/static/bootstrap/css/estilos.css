@@ -5,9 +5,6 @@ body{
     background-color: lightslategrey;
 }
 
-body {
-    overflow-x: hidden;
- }
 
 /* Toggle Styles */
 
@@ -45,7 +42,7 @@ body {
 #page-content-wrapper {
     width: 100%;
     position: absolute;
-    padding: 15px;
+    padding: 70px;
 }
 
 #wrapper.toggled #page-content-wrapper {
