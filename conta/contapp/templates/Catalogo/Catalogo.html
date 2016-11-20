@@ -1,54 +1,45 @@
-{%extends "Base.html"%}
-{% load staticfiles%}
-{%block css %}
-
-{%endblock%}
+{%extends "Base.html"%} {% load staticfiles%} {%block css %} {%endblock%}
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-    <script>
+<script>
       $(document).ready(function(){
           $('#consulta').click(function(){
            // $("#contenido").load('{% url 'queryCatalogo' %}');
              $("#contenido").load('/conta/Catalogo/consulta');
                          });
                      });
-    </script>
+    </script> {%block opcionesmenu %}
+<li role="presentation"><a href="{% url 'login' %}">Home</a></li>
+<li role="presentation"><a href="{% url 'Registro' %}  ">Registro</a></li>
+<li role="presentation" class="active"><a href="{% url 'Catalogo' %}">Catalogo </a></li>
+<li role="presentation"><a href="{% url 'Libros' %}">Libros </a></li>
+<li role="presentation"><a href="{% url 'estadosF' %}">Estados Financieros</a></li>
+<li role="presentation"><a href="#">Cerrar Sesion</a></li>
+{%endblock %} {%block barraLateral%}
+<div class="list-group">
+    <a href="#" class="list-group-item">
+        <span class="glyphicon glyphicon-home"></span> {{empresa}}
+    </a>
 
-{%block opcionesmenu %}
-                    <li role="presentation" class="active"><a href="#">Home</a></li>
-                    <li role="presentation"><a href="#">Registro</a></li>
-                    <li role="presentation"><a href="#">Libros</a></li>
-                    <li role="presentation"><a href="#">Opcion 3</a></li>
-                    <li role="presentation"><a href="#">Opcion 4</a></li>
-                    <li role="presentation"><a href="#">Cerrar Sesion</a></li>
-                    {%endblock %}
-
- {%block barraLateral%} 
-                <li class="sidebar-brand"><a href="#">Opciones: catalago</a></li>
-                <li><a href="{% url 'importar-nuevo' %}">importar</a></li>
-                <li><a href="{% url 'consultaCatalogo' %}" id="">consultar catalogo</a></li>
-                <li><a href="{% url 'createUpdateC' %}">Crear cuenta</a></li>
-                <li><a href="#">Opcion 4</a></li>
-                <li><a href="#">Opcion 5</a></li>
-                <li><a href="#">Opcion 6</a> </li>
-                <li><a href="#">Opcion 7</a></li>
-{%endblock%}
-
-
-{%block areaTrabajo%}
+    <div class="list-group">
+        <a href="/conta/Catalogo/consulta" class="list-group-item active" onclick="">
+            <span class="glyphicon glyphicon-eye-open"></span> Consultar Catalogo</a>
+        <a href="#" class="list-group-item" onclick="">
+            <span class="glyphicon glyphicon-download"></span> Descargar</a>
+        <a href="/conta/Importacion" class="list-group-item" onclick="">
+            <span class="glyphicon glyphicon-upload"></span> Importar</a>
+    </div>
+</div>
+{%endblock%} {%block areaTrabajo%}
 <div id="page-content-wrapper">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
 
-                         <div id ="contenido">
-                          </div>
- </div>
- </div>
- </div>
- </div>
-{%endblock%}
-{% block js%}
-
-{%endblock%}
-
-
+                <div id="contenido">
+                    <h1>Bienvenid@ a la sección Catalogo selecciona una opción</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%} {% block js%} {%endblock%}

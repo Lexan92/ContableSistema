@@ -1,50 +1,41 @@
-{%extends "Base.html"%}
-
-{% load staticfiles%}
-
-{%block css %}
+{%extends "Base.html"%} {% load staticfiles%} {%block css %}
 <!--<link rel="stylesheet" href="{% static 'css/style.css' %}"/>-->
-    {%endblock%}
-
-    {%block opcionesmenu %}
-                    <li role="presentation" class="active"><a href="#">Home</a></li>
-                    <li role="presentation"><a href="#">Registro</a></li>
-                    <li role="presentation"><a href="#">Libros</a></li>
-                    <li role="presentation"><a href="#">Opcion 3</a></li>
-                    <li role="presentation"><a href="#">Opcion 4</a></li>
-                    <li role="presentation"><a href="#">Cerrar Sesion</a></li>
-                    {%endblock %}
+{%endblock%} {%block opcionesmenu %}
+<li role="presentation"><a href="{% url 'login' %}">Home</a></li>
+<li role="presentation"><a href="{% url 'Registro' %}  ">Registro</a></li>
+<li role="presentation" class="active"><a href="{% url 'Catalogo' %}">Catalogo </a></li>
+<li role="presentation"><a href="{% url 'Libros' %}">Libros </a></li>
+<li role="presentation"><a href="{% url 'estadosF' %}">Estados Financieros</a></li>
+<li role="presentation"><a href="#">Cerrar Sesion</a></li>
+{%endblock %} {%block barraLateral%}
 
 
-
-{%block barraLateral%}
-                
-              
-                <div class="list-group">
-                    <a href="/conta/GestionEmpresa/" class="list-group-item active">
-                    <span class="glyphicon glyphicon-plus-sign"></span> Nueva Empresa
-                    </a> 
+<div class="list-group">
+    <a href="/conta/GestionEmpresa/" class="list-group-item active">
+        <span class="glyphicon glyphicon-plus-sign"></span> Nueva Empresa
+    </a>
 
 
-                    {%endblock%}
+    {%endblock%} {%block areaTrabajo%}
+    </br>
+    <h1>GESTION DE EMPRESA</h1>
 
-                    {%block areaTrabajo%}
-<h1>GESTION DE EMPRESA</h1>
-  
     <form class="form-horizontal" action="{% url 'gestionEmpresa' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
-	<div class="hijo">
-        <table>
-        {{ form.as_table }}
-        </table>
-   
-    <input type="hidden" id="codEmpresa" name="codEmpresa" value="{{empresa.codEmpresa}}" />
-    <div class="form-group">
-    <div class="col-sm-12 text-center">
-    <input type="submit" class="btn btn-primary" value="ENVIAR " />
-    </div></div></div>
+        <div class="hijo">
+            <table>
+                {{ form.as_table }}
+            </table>
+
+            <input type="hidden" id="codEmpresa" name="codEmpresa" value="{{empresa.codEmpresa}}" />
+            <div class="form-group">
+                <div class="col-sm-12 text-center">
+                    <input type="submit" class="btn btn-primary" value="ENVIAR " />
+                </div>
+            </div>
+        </div>
 
 
-    
+
     </form>
 
     {%endblock areaTrabajo%}

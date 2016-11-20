@@ -1,48 +1,48 @@
-{%extends "Base.html"%}
-
-{% load staticfiles%}
-
-{%block css %}
+{%extends "Base.html"%} {% load staticfiles%} {%block css %}
 <!--<link rel="stylesheet" href="{% static 'css/style.css' %}"/>-->
-{%endblock%}
+{%endblock%} {%block opcionesmenu %}
+<li role="presentation"><a href="{% url 'login' %}">Home</a></li>
+<li role="presentation"><a href="{% url 'Registro' %}  ">Registro</a></li>
 
-{%block opcionesmenu %}
-                    <li role="presentation" class="active"><a href="#">Home</a></li>
-                    <li role="presentation"><a href="#">Registro</a></li>
-                    <li role="presentation"><a href="#">Libros</a></li>
-                    <li role="presentation"><a href="#">Opcion 3</a></li>
-                    <li role="presentation"><a href="#">Opcion 4</a></li>
-                    <li role="presentation"><a href="#">Cerrar Sesion</a></li>
-                    {%endblock %}
+<li role="presentation" class="active"><a href="{% url 'Catalogo' %}">Catalogo </a></li>
+<li role="presentation"><a href="{% url 'Libros' %}">Libros </a></li>
+<li role="presentation"><a href="{% url 'estadosF' %}">Estados Financieros</a></li>
 
+<li role="presentation"><a href="#">Cerrar Sesion</a></li>
+{%endblock %} {%block barraLateral%}
 
-{%block barraLateral%}
-                
-              
-                <div class="list-group">
-                    <a href="#" class="list-group-item active">
-                    <span class="glyphicon glyphicon-home"></span> {{empresa}}
-                    </a> 
+<div class="list-group">
+    <a href="#" class="list-group-item">
+        <span class="glyphicon glyphicon-home"></span> {{empresa}}
+    </a>
 
+    <div class="list-group">
+        <a href="/conta/Catalogo/consulta" class="list-group-item " onclick="">
+            <span class="glyphicon glyphicon-eye-open"></span> Consultar Catalogo</a>
+        <a href="#" class="list-group-item" onclick="">
+            <span class="glyphicon glyphicon-download"></span> Descargar</a>
+        <a href="/conta/Importacion" class="list-group-item active" onclick="">
+            <span class="glyphicon glyphicon-upload"></span> Importar</a>
+    </div>
+</div>
 
-                    {%endblock%}
+{%endblock%} {%block areaTrabajo%}
+</br>
+<h1 style="text-center"> Importar catalogo de cuentas</h1>
 
-{%block areaTrabajo%}
-<h1>Importar catalogo de cuentas</h1>
-   
-    <form class="form-horizontal" action="{% url 'importar-nuevo' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
-	<div class="hijo">
+<form class="form-horizontal" action="{% url 'importar-nuevo' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+    <div class="hijo">
         <table class="table">
-        {{ form.as_table }}
+            {{ form.as_table }}
         </table>
-   
-    <input type="hidden" id="codEmpresa" name="codEmpresa" value="{{empresa.codEmpresa}}" />
-    <div class="form-group">
-    <div class="col-sm-12 text-center">
-    <input type="submit" class="btn btn-primary" value="ENVIAR ARCHIVO" />
-    </div>
-    </div>
-    </div>
-    </form>
 
-    {%endblock areaTrabajo%}
+        <input type="hidden" id="codEmpresa" name="codEmpresa" value="{{empresa.codEmpresa}}" />
+        <div class="form-group">
+            <div class="col-sm-12 text-center">
+                <input type="submit" class="btn btn-primary" value="ENVIAR ARCHIVO" />
+            </div>
+        </div>
+    </div>
+</form>
+
+{%endblock areaTrabajo%}
